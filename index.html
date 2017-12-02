@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cra.appcache">
+<header>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<title>Community Resilience Assesssment</title>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="css/cra.css" rel="stylesheet" />
+	<link rel="icon" type="image/png" href="/logo.png" />
+</header>
+<body>
+    <div class="container">
+	
+	  <div class="jumbotron">
+		<img id="chhs-logo" src="logo.png" class="img-responsive" alt="CHHS Logo"></img>
+        <p class="lead">University of Maryland Center for Health and Homeland Security</p>
+        <h3 class="display-5">Initial Community Resilience Assessment</h3>
+		<div class="row">
+			<div class="col-3">
+				<label for="jurisdiction">Jurisdiction</label>
+				<select id="jurisdiction" class="btn btn-secondary" value="001"> <!--Supplement an id here instead of using 'name'-->
+					<option value="001">Allegany County</option>
+					<option value="003">Anne Arundel County</option>
+					<option value="005">Baltimore County</option>
+					<option value="009">Calvert County</option>
+					<option value="011">Caroline County</option>
+					<option value="013">Carroll County</option>
+					<option value="015">Cecil County</option>
+					<option value="017">Charles County</option>
+					<option value="019">Dorchester County</option>
+					<option value="021">Frederick County</option>
+					<option value="023">Garrett County</option>
+					<option value="025">Harford County</option>
+					<option value="027">Howard County</option>
+					<option value="029">Kent County</option>
+					<option value="031">Montgomery County</option>
+					<option value="033">Prince George's County</option>
+					<option value="035">Queen Anne's County</option>
+					<option value="037">St. Mary's County</option>
+					<option value="039">Somerset County</option>
+					<option value="041">Talbot County</option>
+					<option value="043">Washington County</option>
+					<option value="045">Wicomico County</option>
+					<option value="047">Worcester County</option>
+					<option value="510">Baltimore city</option>
+				</select>
+			</div>
+			<div class="col-3">
+				<div class="form-group">
+					<label for="multiselect">Overlays</label>
+					<div class="multiselect-wrapper">
+						<div class="dropdown overlay-select selectable clearfix" id="overlay-dropdown-btn">
+							<select multiple name="overlays" id="multiSelect" class="no-display" title="None">
+								<option id="option-radicalization" value="radicalization">Radicalization</option>
+								<option id="option-flooding" value="flooding">Flooding</option>
+							</select>
+							<button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
+								<span id="selectedOverlayName" data-bind="label" class="overlay-option-display">None</span><span class="caret"></span>
+							</button>
+							<ul id="selectedOverlay" class="dropdown-menu multiselect" role="menu">
+								<a class="dropdown-item overlayOption" href="#" title="radicalization">Radicalization</a>
+								<a class="dropdown-item overlayOption" href="#" title="flooding">Flooding</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<a class="btn btn-md btn-success" href="#" role="button" id="generate">Generate</a>
+			</div>
+		</div>
+      </div>
+<input id="address" type="textbox" value="7300 Van Dusen Road, Laurel, Maryland 20707"/>
+		<div id="report-header" class="card" hidden>
+		  <div class="card-block">
+			<h4 class="card-title" id="jurisdiction-name"></h4>
+			<h6 class="card-subtitle mb-2" id="total-population"></h6>
+		  </div>
+		</div>
+	  
+		<ul id="tab-switcher" class="nav nav-tabs" role="tablist" >
+		  <li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#survey-pane" role="tab">Assessment Survey</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link disabled" data-toggle="tab" href="#informant-pane" role="tab">Key Informant Interviews</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#data-pane" role="tab">Data Collection</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link disabled" data-toggle="tab" href="#conversation-pane" role="tab">Community Conversations</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#map-pane" role="tab" id="activate-map-tab">Infrastructure Maps</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link disabled" data-toggle="tab" href="#stakeholder-pane" role="tab">Stakeholder Analysis</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#swot-pane" role="tab">SWOT Analysis</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#vulnerability-pane" role="tab">Capacity and Vulnerability Assessment</a>
+		  </li>
+		</ul>
+		
+		<div class="tab-content">
+		<div id="survey-pane" class="tab-pane tool-pane" role="tabpanel">
+			<div class="row">
+			<div class="col-10 overflow-auto">
+			<ul id="survey-list" class="nav nav-pills">
+			  <li class="nav-item">
+				<a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-1">Participant 1</a>
+			  </li>
+			</ul>
+			</div>
+			<div class="col-2">
+			<ul class="nav nav-pills">
+			  <li class="nav-item" id="survey-controls">
+				<a id="new-survey" class="nav-link btn-secondary" href="#">New</a>
+			  </li>
+			  <li class="nav-item">
+				<a id="export-surveys" class="nav-link btn-secondary" href="#" data-toggle="modal" data-target="#survey-export-modal">Export</a>
+			  </li>
+			 </ul>
+			</div>
+			</div>
+			<div class="tab-content">
+				<div id="surveyTable-pane-1" class="tab-pane fade show active">
+					<table id="surveyTable-1" class="table assessment-table">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="data-pane" class="tab-pane active tool-pane" role="tabpanel">
+			<!--
+			<table id="ageTable" class="table table-striped" hidden>
+			  <thead>
+				<td colspan="4" id="sex-ratio"></td>
+				<tr>
+				  <th>Age</th>
+				  <th>Percent</th>
+				  <th>% of Male Population</th>
+				  <th>% of Female Population</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			</table>
+			  
+			<table id="languageTable" class="table table-striped" hidden>
+			  <thead>
+				<tr>
+				  <th>Language (population Age 5 and older)</th>
+				  <th>Estimate</th>
+				  <th>Percent</th>
+				  <th>Speak English "very Well"</th>
+				  <th>Percent</th>
+				  <th>Speak English less than "very Well"</th>
+				  <th>Percent</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			</table>
+			
+			<table id="hateGroupTable" class="table table-striped" hidden>
+			  <thead>
+				<tr>
+				  <th>Hate Groups (Statewide)</th>
+				  <th>Ideology</th>
+				  <th>City</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			</table>
+			<i class="material-icons">plus_circle</i>
+			-->
+	    </div>
+		<div id="map-pane" class="tab-pane tool-pane" role="tabpanel">
+			<div id="map"></div>
+		</div>
+		<div id="swot-pane" class="tab-pane tool-pane" role="tabpanel">
+			<table id="swotTable" class="table table-bordered">
+			  <thead>
+				<tr>
+				  <th> </th>
+				  <th class="swot-helpful">Helpful</th>
+				  <th class="swot-harmful">Harmful</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+					<th class="swot-internal">Internal</th>
+					<td class="swot-strengths" contentEditable=true data-text="Strengths"></td>
+					<td class="swot-weaknesses" contentEditable=true data-text="Weaknesses"></td>
+				</tr>
+				<tr>
+					<th class="swot-external">External</th>
+					<td class="swot-opportunities" contentEditable=true data-text="Opportunities"></td>
+					<td class="swot-threats" contentEditable=true data-text="Threats"></td>
+				</tr>
+			  </tbody>
+			</table>			
+		</div>
+		<div id="vulnerability-pane" class="tab-pane tool-pane" role="tabpanel">
+			<div class="container">
+			  <div class="row align-items-start">
+				<div class="col col-md-6">
+					<div class="card capacity-header">
+					  <h3 class="card-header text-center card-success">Capacity</h3>
+					</div>
+				</div>
+				<div class="col col-md-6">
+					<div class="card vulnerability-header">
+					  <h3 class="card-header text-center card-danger">Vulnerabilities</h3>
+					</div>
+					<div class="card">
+					  <div class="card-block">
+						<p class="card-text">One or more hate groups are headquartered in the community.</p>
+					  </div>
+					</div>
+				</div>
+			  </div>	
+		    </div>
+		</div>
+		</div>
+      <footer class="footer">
+        <div class="row">
+		<div class="col-4">Center for Heath and Homeland Security</div>
+		<address class="col-4">500 W. Baltimore St. Baltimore, MD 21201</address>
+		<div class="col-4">Tel: 410-706-1014 Fax: 410-706-2726</div>
+		</div>
+      </footer>
+
+    </div> <!-- /container -->
+
+	<!-- Modals -->
+	<div class="modal fade" id="survey-export-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Export Surveys</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<div class="row">
+				<div class="col-6 model-label">
+					File format:
+				</div>
+				<div class="col-6">
+					<select id="survey-export-format" class="btn btn-secondary" value="csv">
+						<option value="tsv">TSV</option>
+						<option value="questions">Questions Only</option>
+					</select>
+				</div>	
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<a id="export-data-url" href="data:text/tab-separated-values," class="btn btn-primary" download="cra-questionnaire.tsv">Export</a>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/tether.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/cra.js"></script>
+	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=INSERT-KEY-HERE&&callback=initMap"></script>-->
+</body>
+</html>
