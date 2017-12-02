@@ -1,0 +1,283 @@
+body {
+	min-height:100vh;
+	background:linear-gradient(#96C0CE,#F0F8FF) repeat fixed 0% 0% transparent;
+}
+
+footer > .row > .col-4 {
+	text-align:center;
+}
+
+.jumbotron {
+	border-radius:0rem 0rem 1rem 1rem;
+}
+
+.warning-flag {
+	color:red;
+	padding-left:2rem;
+	font-size:24px;
+}
+
+.no-display {
+	display:none;
+}
+
+li.nav-item > a {
+	color:black;
+}
+
+#generate {
+	margin-top:32px;
+}
+
+.dropdown-toggle {
+		width:100%;
+}
+
+.dropdown-toggle {
+	border-radius:4px !important;
+	height:37.3333px !important;
+}
+
+.table {
+	background-color:white;
+	border-radius:1rem;
+	margin-bottom:.3rem;
+}
+
+.table-wrapper {
+	margin-top:3rem;
+}
+/*
+.table-wrapper:hover .add-row {
+	display:block;
+}*/
+
+.table-striped {
+	border-radius:1rem 1rem 0rem 0rem !important;
+}
+
+.card {
+	margin-bottom:2rem;
+}
+
+#chhs-logo {
+		height:2rem;
+}
+/*
+.tool-pane {
+	margin-top:2rem;
+}*/
+
+.assessment-table {
+	table-layout:fixed;
+}
+
+.assessment-table > tbody > tr > th {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    text-align: center;
+	vertical-align:middle;
+	width:10%
+}
+/*
+.assessment-table > tbody > tr > td {
+	width:45%
+}
+
+.assessment-table > tbody > tr > td:nth-child(2) {
+	width:40%;
+}
+
+.assessment-table > tbody > tr > td:nth-child(3) {
+	width:50%;
+}*/
+
+.survey-question {
+	width:40%;
+}
+
+.survey-input {
+	width:50%;
+}
+
+#map {
+	position:relative;
+	height:500px;
+	margin: 0;
+	padding: 0;
+	
+}
+
+.swot-helpful {
+	background-color:forestgreen;
+	color:white;
+}
+
+.swot-harmful {
+	background-color:maroon;
+	color:white;
+}
+
+.swot-internal {
+	background-color:lightyellow;
+	vertical-align:middle !important;
+}
+
+.swot-external {
+	background-color:lightblue;
+	vertical-align:middle !important;
+}
+
+.swot-strengths {
+	background-color:rgba(127,255,0,0.1);
+}
+
+.swot-weaknesses {
+	background-color:rgba(255,128,0,0.1);
+}
+
+.swot-opportunities {
+	background-color:rgba(13,152,186,0.1);
+}
+
+.swot-threats {
+	background-color:rgba(153,50,204,0.1);
+}
+
+#swotTable > thead > tr > th {
+	white-space: nowrap;
+	text-align:center;
+}
+
+#swotTable > tbody > tr > th {
+	white-space: nowrap;
+	width: 1px;
+	text-align:center;
+}
+
+#swotTable > tbody > tr > td {
+	height:12rem;
+	text-align:center;
+	vertical-align:middle;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text);
+}
+
+.capacity-header, .vulnerability-header {
+	margin-top:2rem;
+}
+
+.nav.nav-pills {
+	margin-top:1rem;
+	margin-bottom:1rem;
+}
+
+.nav-item-right {
+	margin-left:auto;
+	margin-right:1rem;
+}
+
+.first-row {
+	border:none !important;
+}
+
+table > thead > tr > th, table > thead > tr > td {
+	border:none !important;
+}
+
+.tab-pane > :nth-child(1) {
+	margin-top:1rem;
+}
+
+.survey-input > label {
+	margin-right:.5rem;
+}
+
+.survey-input > label > input {
+	margin-right:.5rem;
+}
+
+.model-label {
+	padding-left:5rem;
+}
+
+.overflow-auto {
+	overflow-x: auto;	
+}
+
+#survey-controls {
+	margin-right:.3rem;
+}
+
+#data-pane > h3 {
+	margin-top:2rem;
+}
+
+thead > :nth-child(2) > th {
+	padding:0rem;
+}
+/*
+th > div.alert {
+	margin:0.3rem;
+}
+*/
+.helpbox {
+	margin:0.3rem;
+	height:auto;
+	max-height:1000px;
+	transition:all 1.3s cubic-bezier(0.18, 0.89, 0.32, 2.28);
+	overflow:hidden;
+}
+
+.collapsed {
+	max-height:0rem;
+    padding:0rem;
+	border:none;
+}
+
+.ask-help {
+	color:#025aa5;
+	cursor:pointer;
+}
+
+.ask-help:hover {
+	color:#0275d8;
+}
+
+.remove-row {
+	display:inline;
+	visibility:hidden;
+	opacity:0;
+	color:darkred;
+	transition:visibility 0.3s linear, opacity 300ms;
+}
+
+.remove-row:hover {
+	color:#a94442;
+}
+
+.add-row {
+	display:inline;
+	visibility:hidden;
+	opacity:0;
+	color:rgba(34,119,34,1);
+	transition:visibility 0.3s linear, opacity 300ms;
+}
+
+.add-row:hover {
+	color:#449d44;
+}
+
+tr:hover .add-row {
+	cursor:pointer;
+	visibility:visible;
+	opacity:1;
+}
+
+tr:hover .remove-row {
+	cursor:pointer;
+	visibility:visible;
+	opacity:1;
+}
