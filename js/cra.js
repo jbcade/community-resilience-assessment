@@ -17,15 +17,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		var visibleCounties = document.querySelectorAll("#county > option:not(.no-display)");
 		for (var i = 0, len = visibleCounties.length; i < len; i++) {
 			visibleCounties[i].classList.add('no-display');
-			console.log("Hidden");
 		}
 		var statewideCounties = document.querySelectorAll('#county > option[data-statefp="' + state.code + '"]');
 		for (var i = statewideCounties.length - 1; i >= 0; --i) {
 			var parentSelect = statewideCounties[i].parentNode;
 			statewideCounties[i].classList.remove('no-display');
+			if (i === 0) {
+				statewideCounties[i].selected = true;	
+			}
 			statewideCounties[i].remove();
 			parentSelect.prepend(statewideCounties[i]);
-			console.log("Displayed");
 		}
 	});
 	
