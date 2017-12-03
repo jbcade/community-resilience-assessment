@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			var parentSelect = statewideCounties[i].parentNode;
 			statewideCounties[i].classList.remove('no-display');
 			statewideCounties[i].remove();
-			parentSelect.Prepend(statewideCounties[i]);
+			parentSelect.prepend(statewideCounties[i]);
 			console.log("Displayed");
 		}
 	});
