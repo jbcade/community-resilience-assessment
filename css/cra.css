@@ -11,7 +11,7 @@ footer > .row > .col-4 {
 	border-radius:0rem 0rem 1rem 1rem;
 }
 
-#state, #jurisdiction, #place {
+#state, #county, #place {
 	display:block;
 	width:100%;
 }
