@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {	
+document.addEventListener("DOMContentLoaded", function() {
+	const backend = 
 	var stateSelect = document.getElementById('state');
 	var stateOption = stateSelect.querySelector(':checked');
 	var state = {
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 	stateSelect.addEventListener('change', function(event) {
 		state.name = event.target.value;
-		var selectedState = event.target.querySelector(':checked')
+		var selectedState = event.target.querySelector(':checked');
 		state.abbreviation = selectedState.dataset.stateabbr;
 		state.code = selectedState.dataset.statefp;
 		console.log(state.name + " " + state.abbreviation + " " + state.code);
@@ -28,6 +29,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			statewideCounties[i].remove();
 			parentSelect.prepend(statewideCounties[i]);
 		}
+	});
+
+	var countySelect = document.getElementById('county');
+	var countyOption = countySelect.querySelector(':checked');
+	var county = {
+		name: countySelect.value,
+		type: countyOption.dataset.type,
+		code: stateOption.dataset.placefp
+	};
+	stateSelect.addEventListener('change', function(event) {
+		county.name = event.target.value;
+		var selectedCounty = event.target.querySelector(':checked');
+		county.type = selectedCounty.dataset.type;
+		county.code = selectedCounty.dataset.placefp;
+		console.log(county.name + " " + county.type + " " + county.code);
 	});
 	
 	var questionNumber = 1;
