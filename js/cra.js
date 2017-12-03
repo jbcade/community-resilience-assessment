@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		type: countyOption.dataset.type,
 		code: stateOption.dataset.placefp
 	};
-	stateSelect.addEventListener('change', function(event) {
+	countySelect.addEventListener('change', function(event) {
 		county.name = event.target.value;
 		var selectedCounty = event.target.querySelector(':checked');
 		county.type = selectedCounty.dataset.type;
