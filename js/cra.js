@@ -20,8 +20,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log("Hidden");
 		}
 		var statewideCounties = document.querySelectorAll('#county > option[data-statefp="' + state.code + '"]');
-		for (var i = 0, len = statewideCounties.length; i < len; i++) {
+		for (var i = statewideCounties.length - 1; i >= 0; --i) {
+			var parentSelect = statewideCounties[i].parentNode;
 			statewideCounties[i].classList.remove('no-display');
+			statewideCounties[i].remove();
+			parentSelect.Prepend(statewideCounties[i]);
 			console.log("Displayed");
 		}
 	});
