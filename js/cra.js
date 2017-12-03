@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		state.code = selectedState.dataset.statefp;
 		console.log(state.name + " " + state.abbreviation + " " + state.code);
 		
-		var countyList = document.querySelectorAll("#county > option");
-		var visibleCounties = countyList.querySelectorAll(":not(.no-display)");
+		//var countyList = document.querySelectorAll("#county > option");
+		var visibleCounties = document.querySelectorAll("#county > option:not(.no-display)");
 		for (var i = 0, len = visibleCounties.length; i < len; i++) {
 			visibleCounties[i].classList.add('no-display');
 			console.log("Hidden");
