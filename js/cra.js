@@ -12,6 +12,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		state.abbreviation = selectedState.dataset.stateabbr;
 		state.code = selectedState.dataset.statefp;
 		console.log(state.name + " " + state.abbreviation + " " + state.code);
+		
+		var countyList = document.querySelectorAll("#county > option");
+		var visibleCounties = var countyList.querySelectorAll(":not(.no-display)");
+		for (var i = 0, len = visibleCounties.length; i < len; i++) {
+			visibleCounties[i].classList.add('no-display');
+		}
 	});
 	
 	var questionNumber = 1;
