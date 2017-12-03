@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			visibleCounties[i].classList.add('no-display');
 			console.log("Hidden");
 		}
+		var statewideCounties = document.querySelectorAll('#county > option[data-statefp="' + state.code + '"]');
+		for (var i = 0, len = statewideCounties.length; i < len; i++) {
+			statewideCounties[i].classList.remove('no-display');
+			console.log("Displayed");
+		}
 	});
 	
 	var questionNumber = 1;
