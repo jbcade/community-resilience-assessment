@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			statewideCounties[i].classList.remove('no-display');
 			if (i === 0) {
 				statewideCounties[i].selected = true;	
-				event.target.onchange();
+				var event = new Event('change');
+				document.getElementById('county').dispatchEvent(event);
 			}
 			statewideCounties[i].remove();
 			parentSelect.prepend(statewideCounties[i]);
