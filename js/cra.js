@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-	const backend = 
+	const backend = 'https://us-central1-exemplary-rex-97621.cloudfunctions.net/Community-Resilience-Assessment/';
 	var stateSelect = document.getElementById('state');
 	var stateOption = stateSelect.querySelector(':checked');
 	var state = {
