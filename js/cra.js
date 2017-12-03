@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var visibleCounties = var countyList.querySelectorAll(":not(.no-display)");
 		for (var i = 0, len = visibleCounties.length; i < len; i++) {
 			visibleCounties[i].classList.add('no-display');
+			console.log("Hidden");
 		}
 	});
 	
