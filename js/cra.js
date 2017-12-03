@@ -45,7 +45,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		var selectedCounty = event.target.querySelector(':checked');
 		county.type = selectedCounty.dataset.type;
 		county.code = selectedCounty.dataset.placefp;
+		var placesURL = encodeURI(backend + 'places?state=" + state.abbreviation + '&county=' + county.name);
 		console.log(county.name + " " + county.type + " " + county.code);
+		
+		fetch(placesURL).then(function(response) {
+			if(response.ok) {
+				return response.json();
+			}
+			throw new Error('Network response was not ok.');
+		}).then(function(countyPlaces) { 
+			console.log(countyPlaces);
+		}).catch(function(error) {
+			console.log('There has been a problem with your fetch operation: ' + error.message);
+		});
 	});
 	
 	var questionNumber = 1;
