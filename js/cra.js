@@ -1,25 +1,18 @@
-document.addEventListener("DOMContentLoaded", function() {
-	var overlays = [];
-	
+document.addEventListener("DOMContentLoaded", function() {	
 	var stateSelect = document.getElementById('state');
-	var stateName = stateSelect.value;
 	var stateOption = stateSelect.querySelector(':checked');
-	var stateAbbr = stateOption.dataset.stateabbr;
-	var stateCode = stateOption.dataset.statefp;
+	var state = {
+		name: stateSelect.value,
+		abbreviation: stateOption.dataset.stateabbr,
+		code: stateOption.dataset.statefp
+	};
 	stateSelect.addEventListener('change', function(event) {
-		var stateName = event.target.value;
+		state.name = event.target.value;
 		var selectedState = event.target.querySelector(':checked')
-		var stateAbbr = selectedState.dataset.stateabbr;
-		var stateCode = selectedState.dataset.statefp;
-		console.log(stateName + " " + stateAbbr + " " + stateCode);
+		state.abbreviation = selectedState.dataset.stateabbr;
+		state.code = selectedState.dataset.statefp;
+		console.log(state.name + " " + state.abbreviation + " " + state.code);
 	});
-	
-	var multiselects = document.getElementsByClassName('multiselect');
-	for (var i = 0, len = multiselects.length; i < len; i++) {
-		multiselects[i].addEventListener('click', function(event) {
-			event.stopPropagation();
-		});
-	}
 	
 	var questionNumber = 1;
 	var surveyNumber = 2;
@@ -45,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		surveyNumber++;
 	});
 
+	var overlays = [];
 	var selectables = document.getElementsByClassName('dropdown-item');
 	for (var i = 0, len = selectables.length; i < len; i++) {
         	selectables[i].addEventListener('click', function(event) {
@@ -137,4 +131,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		  }
 		});
 	})*/
+	
+	var multiselects = document.getElementsByClassName('multiselect');
+	for (var i = 0, len = multiselects.length; i < len; i++) {
+		multiselects[i].addEventListener('click', function(event) {
+			event.stopPropagation();
+		});
+	}
 });
