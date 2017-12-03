@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var selectedCounty = event.target.querySelector(':checked');
 		county.type = selectedCounty.dataset.type;
 		county.code = selectedCounty.dataset.placefp;
-		var placesURL = encodeURI(backend + 'places?state=" + state.abbreviation + '&county=' + county.name);
+		var placesURL = encodeURI(backend + 'places?state=' + state.abbreviation + '&county=' + county.name);
 		console.log(county.name + " " + county.type + " " + county.code);
 		
 		fetch(placesURL).then(function(response) {
