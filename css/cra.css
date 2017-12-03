@@ -11,6 +11,15 @@ footer > .row > .col-4 {
 	border-radius:0rem 0rem 1rem 1rem;
 }
 
+#state, #jurisdiction, #place {
+	display:block;
+	width:100%;
+}
+
+select:invalid {
+	color: gray;
+}
+
 .warning-flag {
 	color:red;
 	padding-left:2rem;
