@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var stateSelect = document.getElementById('state');
 	stateSelect.addEventListener('change', function(event) {
-		console.log(event.target.value);
+		console.log(event.target.querySelector(':checked').getAttribute('data-statefp'));
 	});
 	
 	var multiselects = document.getElementsByClassName('multiselect');
