@@ -6,11 +6,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	var stateOption = stateSelect.querySelector(':checked');
 	var stateAbbr = stateOption.dataset.stateabbr;
 	var stateCode = stateOption.dataset.statefp;
-	console.log(stateName);
-	console.log(stateAbbr);
-	console.log(stateCode);
 	stateSelect.addEventListener('change', function(event) {
-		console.log(event.target.querySelector(':checked').getAttribute('data-statefp'));
+		var stateName = event.target.value;
+		var selectedState = event.target.querySelector(':checked')
+		var stateAbbr = selectedState.dataset.stateabbr;
+		var stateCode = selectedState.dataset.statefp;
+		console.log(stateName + " " + stateAbbr + " " + stateCode);
 	});
 	
 	var multiselects = document.getElementsByClassName('multiselect');
