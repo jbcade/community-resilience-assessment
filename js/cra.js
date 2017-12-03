@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var stateSelect = document.getElementById('state');
 	var stateName = stateSelect.value;
-	var stateAbbr = stateSelect.dataset.stateabbr;
-	var stateCode = stateSelect.dataset.statefp;
+	var stateOption = stateSelect.querySelector(':checked');
+	var stateAbbr = stateOption.dataset.stateabbr;
+	var stateCode = stateOption.dataset.statefp;
 	console.log(stateName);
 	console.log(stateAbbr);
 	console.log(stateCode);
