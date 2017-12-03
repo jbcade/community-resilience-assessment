@@ -1,4 +1,4 @@
-﻿var population = 0;
+var population = 0;
 var overlays = [];
 //var jurisdictionString = "";
 var questionNumber = 1;
@@ -8,13 +8,18 @@ var geocoder;
 var map;
 
 document.addEventListener("DOMContentLoaded", function() {
-	//profile.doSomething();
-    var multiselects = document.getElementsByClassName('multiselect');
-    for (var i = 0, len = multiselects.length; i < len; i++) {
-        multiselects[i].addEventListener('click', function(event) {
+	
+	var stateSelect = document.getElementById('state');
+	stateSelect.addEventListener('change', function(event) {
+		console.log(event.target.value);
+	});
+	
+	var multiselects = document.getElementsByClassName('multiselect');
+	for (var i = 0, len = multiselects.length; i < len; i++) {
+		multiselects[i].addEventListener('click', function(event) {
 			event.stopPropagation();
 		});
-    }
+	}
 	
 	var newSurveyButton = document.getElementById('new-survey');
 	newSurveyButton.addEventListener('click', function(event) {
@@ -38,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		surveyNumber++;
 	});
 
-    var selectables = document.getElementsByClassName('dropdown-item');
-    for (var i = 0, len = selectables.length; i < len; i++) {
-        selectables[i].addEventListener('click', function(event) {
+	var selectables = document.getElementsByClassName('dropdown-item');
+	for (var i = 0, len = selectables.length; i < len; i++) {
+        	selectables[i].addEventListener('click', function(event) {
 			var overlayName = event.target.title;
 			if(document.getElementById('option-' + overlayName).selected == false) {
 				document.getElementById('option-' + overlayName).selected = true;
@@ -61,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 			document.getElementById('selectedOverlayName').textContent = overlayString;
 		});
-    }
+	}
 	
 	var generateButton = document.getElementById('generate');
 	generate.addEventListener('click', function() {/*
