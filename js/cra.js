@@ -1,20 +1,13 @@
-//var population = 0;
-//var jurisdictionString = "";
-var questionNumber = 1;
-var surveyNumber = 2;
-//var stateString = "maryland";
-var geocoder;
-var map;
-
 document.addEventListener("DOMContentLoaded", function() {
 	var overlays = [];
-	var stateName = document.getElementById('state').value;
-	var stateAbbr = document.getElementById('state').dataList.stateabbr;
-	var stateCode = document.getElementById('state').dataList.statefp;
+	
+	var stateSelect = document.getElementById('state');
+	var stateName = stateSelect.value;
+	var stateAbbr = stateSelect.dataset.stateabbr;
+	var stateCode = stateSelect.dataset.statefp;
 	console.log(stateName);
 	console.log(stateAbbr);
 	console.log(stateCode);
-	var stateSelect = document.getElementById('state');
 	stateSelect.addEventListener('change', function(event) {
 		console.log(event.target.querySelector(':checked').getAttribute('data-statefp'));
 	});
@@ -26,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 	
+	var questionNumber = 1;
+	var surveyNumber = 2;
 	var newSurveyButton = document.getElementById('new-survey');
 	newSurveyButton.addEventListener('click', function(event) {
 		event.preventDefault();
@@ -120,7 +115,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 	
 
-	/*	
+	/*
+	var geocoder;
+	var map;
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(map, 'resize');
 		console.log('Map resized');
