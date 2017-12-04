@@ -9,6 +9,7 @@ footer > .row > .col-4 {
 
 .jumbotron {
 	border-radius:0rem 0rem 1rem 1rem;
+	box-shadow:0px 6px 20px 0px rgba(0,0,0,0.19),0px 8px 17px 0px rgba(0,0,0,0.2);
 }
 
 #state, #county, #place {
