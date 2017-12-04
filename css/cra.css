@@ -294,3 +294,15 @@ tr:hover .remove-row {
 	opacity:1;
 }
 
+#swot-harmful {
+	border-radius:0rem 1rem 0rem 0rem;
+}
+
+#sot-threats {
+	border:none;	
+}
+
+#swot-external {
+	border-radius:0rem 1rem 0rem 0rem;
+	border:none;
+}
