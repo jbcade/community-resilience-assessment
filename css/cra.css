@@ -138,6 +138,8 @@ li.nav-item > a {
 .swot-external {
 	background-color:lightblue;
 	vertical-align:middle !important;
+	border-radius:0rem 0rem 0rem 1rem;
+	border:none !important;
 }
 
 .swot-strengths {
@@ -154,6 +156,7 @@ li.nav-item > a {
 
 .swot-threats {
 	background-color:rgba(153,50,204,0.1);
+	border:none !important;
 }
 
 #swotTable > thead > tr > th {
@@ -296,13 +299,4 @@ tr:hover .remove-row {
 
 .swot-harmful {
 	border-radius:0rem 1rem 0rem 0rem;
-}
-
-.sot-threats {
-	border:none;	
-}
-
-.swot-external {
-	border-radius:0rem 1rem 0rem 0rem;
-	border:none;
 }
