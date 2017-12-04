@@ -3,6 +3,10 @@ body {
 	background:linear-gradient(#96C0CE,#F0F8FF) repeat fixed 0% 0% transparent;
 }
 
+footer {
+	margin-top:2rem;	
+}
+
 footer > .row > .col-4 {
 	text-align:center;
 }
