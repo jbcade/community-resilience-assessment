@@ -56,6 +56,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).then(function(countyPlaces) { 
 			console.log(countyPlaces);
 			var placeSelect = document.getElementById('place');
+			while (placeSelect.hasChildNodes()) {
+				placeSelect.removeChild(placeSelect.lastChild);
+			}
 			var defaultPlaceOption = document.createElement('option');
 				defaultPlaceOption.selected = true;
 				defaultPlaceOption.dataset.placefp = "";
