@@ -55,6 +55,22 @@ document.addEventListener("DOMContentLoaded", function() {
 			throw new Error('Network response was not ok.');
 		}).then(function(countyPlaces) { 
 			console.log(countyPlaces);
+			var placeSelect = document.getElementById('place');
+			var defaultPlaceOption = document.createElement('option');
+				defaultPlaceOption.selected = true;
+				defaultPlaceOption.dataset.placefp = "";
+				defaultPlaceOption.dataset.type = "";
+				var DefaultPlaceOptionText = document.createTextNode("None");
+					defaultPlaceOption.appendChild(defaultPlaceOptionText);
+				placeSelect.appendChild(placeOption);
+			countyPlaces.forEach((place) => {
+				var placeOption = document.createElement('option');
+					placeOption.dataset.placefp = place.code;
+					placeOption.dataset.type = place.type;
+					var placeOptionText = document.createTextNode(place.name);
+					placeOption.appendChild(placeOptionText);
+				placeSelect.appendChild(placeOption);
+			});
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
