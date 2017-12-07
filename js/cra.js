@@ -128,29 +128,27 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById('selectedOverlayName').textContent = overlayString;
 		});
 	}
-	
+
+	var placeSelect = document.getElementById('place');
+	var placeOption = placeSelect.querySelector(':checked');
+	var place = {
+		name: placeSelect.value,
+		code: placeOption.dataset.placefp,
+		type: stateOption.dataset.type
+	};
 	var generateButton = document.getElementById('generate');
-	generate.addEventListener('click', function() {/*
-		var selectedJurisdiction = document.getElementById('jurisdiction');
-		profile.jurisdiction["name"] = document.querySelector('option[value="'+selectedJurisdiction.value+'"]').textContent;
-		profile.jurisdiction["fips"] = selectedJurisdiction.value;
-		console.log(profile.jurisdiction["fips"]);
-		fetchCensusData('B01003_001E', function(populationResponse) {
-			var populationString = JSON.parse(populationResponse).pop();
-			population = parseInt(populationString.splice(0,1));
-			profile.population = population;
-			populationString = profile.population.toLocaleString();
-			document.getElementById('jurisdiction-name').textContent = profile.jurisdiction["name"] + ' Resilience Profile'
-			document.getElementById('total-population').textContent = 'Population: ' + populationString;
-			document.getElementById('tab-switcher').hidden = false;
-			document.getElementById('report-header').hidden = false;
-			buildAssessments(1);
-			populateDataFramework();
-			$('[data-toggle="popover"]').popover({
-				trigger: 'hover',
-				container: 'body'
-			})
-		});*/
+	generate.addEventListener('click', function() {
+		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
+		fetch(assessURL).then(function(response) {
+			if(response.ok) {
+				return response.json();
+			}
+			throw new Error('Network response was not ok.');
+		}).then(function(profile) { 
+			console.log(profile);
+		}).catch(function(error) {
+			console.log('There has been a problem with your fetch operation: ' + error.message);
+		});		
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
