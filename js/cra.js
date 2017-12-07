@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				defaultPlaceOption.dataset.type = "";
 				var defaultPlaceOptionText = document.createTextNode("None");
 					defaultPlaceOption.appendChild(defaultPlaceOptionText);
-				placeSelect.appendChild(placeOption);
+				placeSelect.appendChild(defaultPlaceOption);
 			countyPlaces.forEach((place) => {
 				var placeOption = document.createElement('option');
 					placeOption.dataset.placefp = place.code;
