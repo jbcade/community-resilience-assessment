@@ -213,5 +213,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function populateDataFramework (data) {
-	console.log(data);	
+	console.log(data);
+	var dataPane = document.querySelector('#data-pane');
+	while (dataPane.hasChildNodes()) {
+		dataPane.removeChild(dataPane.lastChild);
+	}
 }
