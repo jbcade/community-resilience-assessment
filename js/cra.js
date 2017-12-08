@@ -225,5 +225,5 @@ function populateDataFramework (data) {
 			var sectionHeadingText = document.createTextNode(Object.keys(section)[0]);
 		sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
-	}
+	});
 }
