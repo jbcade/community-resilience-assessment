@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById('total-population').textContent = 'Population: ' + populationString;
 			document.getElementById('tab-switcher').hidden = false;
 			document.getElementById('report-header').hidden = false;
+			populateDataFramework(profile.data);
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});		
@@ -210,3 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 });
+
+function populateDataFramework (data) {
+	console.log(data);	
+}
