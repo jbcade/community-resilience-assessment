@@ -218,4 +218,11 @@ function populateDataFramework (data) {
 	while (dataPane.hasChildNodes()) {
 		dataPane.removeChild(dataPane.lastChild);
 	}
+	data.forEach(function(section, si) {
+		var sectionHeading = document.createElement('h3');
+			sectionHeading.id = 'data-heading-' + si;
+			var sectionHeadingText = document.createTextNode(Object.keys(section)[0]);
+		sectionHeading.appendChild(sectionHeadingText);
+		dataPane.appendChild(sectionHeading);
+	}
 }
