@@ -139,8 +139,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	var generateButton = document.getElementById('generate');
 	generate.addEventListener('click', function() {
 		place.name = placeSelect.value;
-		place.code = placeOption.dataset.placefp;
-		place.type = stateOption.dataset.type;
+		var currentPlace = placeSelect.querySelector(':checked');
+		place.code = currentPlace.dataset.placefp;
+		place.type = currentPlace.dataset.type;
 		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
 		fetch(assessURL).then(function(response) {
 			if(response.ok) {
