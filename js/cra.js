@@ -225,5 +225,14 @@ function populateDataFramework (data) {
 			var sectionHeadingText = document.createTextNode(Object.keys(section)[0]);
 		sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
+		section[Object.keys(section)[0]].forEach(function(newTableObject, six, section) {
+			console.log(newTableObject);
+			var tableName = Object.keys(newTableObject)[0];
+			var table = document.createElement("table");
+				table.id = tableName + "-table";
+				table.classList.add('table');
+				table.classList.add('table-striped');
+			dataPane.appendChild(table);
+		});
 	});
 }
