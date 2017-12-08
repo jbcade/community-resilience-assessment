@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var selectables = document.getElementsByClassName('dropdown-item');
 	for (var i = 0, len = selectables.length; i < len; i++) {
         	selectables[i].addEventListener('click', function(event) {
+			event.preventDefault();
 			var overlayName = event.target.title;
 			if(document.getElementById('option-' + overlayName).selected == false) {
 				document.getElementById('option-' + overlayName).selected = true;
