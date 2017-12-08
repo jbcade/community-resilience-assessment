@@ -16,6 +16,10 @@ footer > .row > .col-4 {
 	box-shadow:0px 6px 20px 0px rgba(0,0,0,0.19),0px 8px 17px 0px rgba(0,0,0,0.2);
 }
 
+.card {
+	box-shadow:0px 6px 20px 0px rgba(0,0,0,0.19),0px 8px 17px 0px rgba(0,0,0,0.2);
+}
+
 #state, #county, #place {
 	display:block;
 	width:100%;
