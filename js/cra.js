@@ -149,7 +149,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 			throw new Error('Network response was not ok.');
 		}).then(function(profile) { 
-			console.log(profile);
+			var populationString = profile.population.toLocaleString();
+			document.getElementById('jurisdiction-name').textContent = profile.jurisdiction.place.name + ' Resilience Profile'
+			document.getElementById('total-population').textContent = 'Population: ' + populationString;
+			document.getElementById('tab-switcher').hidden = false;
+			document.getElementById('report-header').hidden = false;
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});		
