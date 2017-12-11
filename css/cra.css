@@ -308,3 +308,7 @@ tr:hover .remove-row {
 .swot-harmful {
 	border-radius:0rem 1rem 0rem 0rem;
 }
+
+#jurisdiction-name {
+	text-transform:capitalize;	
+}
