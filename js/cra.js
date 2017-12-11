@@ -213,7 +213,157 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 });
 
-function populateDataFramework (data) {
+function populateDataFramework(dataFramework) {
+	var dataPane = document.querySelector('#data-pane');
+	while (dataPane.hasChildNodes()) {
+		dataPane.removeChild(dataPane.lastChild);
+	}
+	/*
+	var tableOfContents = document.createElement('div');
+		tableOfContents.classList.add('card');
+		var tocHeader = document.createElement('div');
+			tocHeader.classList.add('card-header');
+			var tocHeaderH5 = document.createElement('h5')
+				tocHeaderH5.classList.add('mb-0');
+				var tocHeaderLink = document.createElement('a');
+					tocHeaderLink.href = '#tocContent';
+					tocHeaderLink.dataset.toggle = 'collapse';
+					var tableOfContentsText = document.createTextNode("Table of Contents");
+					tocHeaderLink.appendChild(tableOfContentsText);
+				tocHeaderH5.appendChild(tocHeaderLink);
+			tocHeader.appendChild(tocHeaderH5);
+		tableOfContents.appendChild(tocHeader);
+	dataPane.appendChild(tableOfContents);
+	*/	
+	dataFramework.forEach(function(section, si) {
+		console.log(section);
+		//console.log(Object.keys(dataFramework[si])[0]);
+		//var sectionHeadingString = Object.keys(dataFramework[si])[0];
+		var sectionHeading = document.createElement('h3');
+			sectionHeading.id = 'data-heading-' + si;
+				var sectionHeadingText = document.createTextNode(Object.keys(section)[0]);
+			sectionHeading.appendChild(sectionHeadingText);
+		dataPane.appendChild(sectionHeading);
+		section[Object.keys(section)[0]].forEach(function(dataTable, six) {
+			console.log(dataTable);
+			var tableName = Object.keys(dataTable)[0];
+			var table = document.createElement("table");
+				table.id = tableName + "-table";
+				table.classList.add('table');
+				table.classList.add('table-striped');
+				var thead = document.createElement("thead");
+					var tr = document.createElement("tr");
+						console.log(dataTable[tableName]["variables"]);
+						var titleTh = document.createElement("th");
+							var titleThText = document.createTextNode(tableName);
+							titleTh.appendChild(titleThText);
+						tr.appendChild(titleTh);
+						var headerControls = document.createElement("th");
+							var helpIcon = document.createElement('i');
+								helpIcon.classList.add('material-icons');
+								helpIcon.classList.add('ask-help');
+								//helpIcon.classList.add('float-right');
+								var helpIconText = document.createTextNode('help');
+								helpIcon.appendChild(helpIconText);
+								helpIcon.addEventListener('click', function(event) {
+									var thead = event.target.parentNode.parentNode.parentNode;
+									var helpbox = thead.querySelector('tr:nth-child(2) > th > .helpbox');
+									if (helpbox.classList.contains('collapsed')) {
+										helpbox.classList.remove('collapsed');
+									} else {
+										helpbox.classList.add('collapsed');
+									}
+								});
+							headerControls.appendChild(helpIcon);
+						tr.appendChild(headerControls);
+						dataTable[tableName]["variables"].forEach(function(variable) {
+							var th = document.createElement("th");
+								thText = document.createTextNode(variable.name);
+							th.appendChild(thText);
+							tr.appendChild(th);
+						});
+					thead.appendChild(tr);
+					var helpTr = document.createElement("tr");
+						var helpTh = document.createElement("th");
+							helpTh.colSpan = dataTable[tableName]["variables"].length + 2;
+							var helpDiv = document.createElement("div");
+								helpDiv.classList.add('alert');
+								helpDiv.classList.add('alert-info');
+								helpDiv.classList.add('helpbox');
+								helpDiv.classList.add('collapsed');
+								helpDiv.innerHTML = dataTable[tableName]["description"];
+							helpTh.appendChild(helpDiv);
+						helpTr.appendChild(helpTh);
+					thead.appendChild(helpTr);
+				var tbody = document.createElement("tbody");
+				dataTable[tableName]["dataset"].forEach(function(category, dsi) {
+					var bodyTr = document.createElement('tr');
+						var bodyTh = document.createElement('th');
+							bodyTh.scope = "row";
+							bodyTh.setAttribute("contentEditable", true);
+							var bodyThText = document.createTextNode(category.name);
+							bodyTh.appendChild(bodyThText);
+						bodyTr.appendChild(bodyTh);
+						var rowControls = document.createElement('th');
+							var plusIcon = document.createElement('i');
+								plusIcon.classList.add('material-icons');
+								plusIcon.classList.add('add-row');
+								var plusIconText = document.createTextNode('add_circle');
+								plusIcon.appendChild(plusIconText);
+								plusIcon.addEventListener('click', function(event) {
+									console.log(event.target.parentNode.parentNode.parentNode);
+									var referenceNode = event.target.parentNode.parentNode;
+									var fieldsToAdd = event.target.parentNode.parentNode.parentNode.parentNode.querySelectorAll('thead > tr > th').length-3;
+									var addedTr = document.createElement('tr');
+										var addedTh = document.createElement('th');
+											addedTh.scope = "row";
+											addedTh.setAttribute("contentEditable", true);
+									addedTr.appendChild(addedTh);
+									var addedControls = document.createElement('th');
+									addedTr.appendChild(addedControls);
+									for (var i = 0, len = fieldsToAdd; i < len; i++) {
+										var addedTd = document.createElement('td');
+											addedTd.setAttribute("contentEditable", true);
+										addedTr.appendChild(addedTd);
+									}
+									referenceNode.parentNode.insertBefore(addedTr, referenceNode.nextSibling);
+								});
+							rowControls.appendChild(plusIcon);
+							var minusIcon = document.createElement('i');
+								minusIcon.classList.add('material-icons');
+								minusIcon.classList.add('remove-row');
+								//minusIcon.classList.add('float-right');
+								var minusIconText = document.createTextNode('remove_circle');
+								minusIcon.appendChild(minusIconText);
+								minusIcon.addEventListener('click', function(event) {
+									var killRow = event.target.parentNode.parentNode;
+									console.log(killRow);
+									killRow.parentNode.removeChild(killRow);
+								});
+							rowControls.appendChild(minusIcon);
+						bodyTr.appendChild(rowControls);
+						var datapoints = category.datapoints;
+						datapoints.forEach(function(datapoint, dix) {
+							var innerTd = document.createElement('td');
+							innerTd.setAttribute("contentEditable", true);
+							if (dataTable[tableName].type[fix] === 'address') {
+								innerTd.classList.add('address');
+								innerTd.addEventListener('blur', addressLookup);
+							}
+								var innerTdText = document.createTextNode(datapoint);
+							innerTd.appendChild(innerTdText);
+							bodyTr.appendChild(innerTd);
+						});
+					tbody.appendChild(bodyTr);
+				});
+			table.appendChild(thead);
+			table.appendChild(tbody);
+			dataPane.appendChild(table);
+		});
+	});
+}
+
+/*function populateDataFramework (data) {
 	console.log(data);
 	var dataPane = document.querySelector('#data-pane');
 	while (dataPane.hasChildNodes()) {
@@ -235,4 +385,4 @@ function populateDataFramework (data) {
 			dataPane.appendChild(table);
 		});
 	});
-}
+}*/
