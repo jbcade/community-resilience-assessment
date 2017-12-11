@@ -245,6 +245,7 @@ function populateDataFramework(dataFramework) {
 			sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
 		section[Object.keys(section)[0]].forEach(function(dataTable, six) {
+			var dataTypes = [];
 			console.log(dataTable);
 			var tableName = Object.keys(dataTable)[0];
 			var table = document.createElement("table");
@@ -277,6 +278,7 @@ function populateDataFramework(dataFramework) {
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
 						dataTable[tableName]["variables"].forEach(function(variable) {
+							dataTypes.push(variable.type);
 							var th = document.createElement("th");
 								thText = document.createTextNode(variable.name);
 							th.appendChild(thText);
@@ -346,7 +348,7 @@ function populateDataFramework(dataFramework) {
 						datapoints.forEach(function(datapoint, dix) {
 							var innerTd = document.createElement('td');
 							innerTd.setAttribute("contentEditable", true);
-							if (dataTable[tableName].type[fix] === 'address') {
+							if (dataTypes[dix] === 'address') {
 								innerTd.classList.add('address');
 								innerTd.addEventListener('blur', addressLookup);
 							}
