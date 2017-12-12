@@ -79,28 +79,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	});
 	
-	var questionNumber = 1;
-	var surveyNumber = 2;
+	var surveyTracker = {
+		question: 1,
+		questions: [],
+		survey: 1,
+		categories: []
+	};
 	var newSurveyButton = document.getElementById('new-survey');
 	newSurveyButton.addEventListener('click', function(event) {
 		event.preventDefault();
 		var newSurveyButtonWrapper = document.getElementById('survey-list');
-		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyNumber + '">Participant ' + surveyNumber + '</a></li>');
+		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
 		var newSurveyTable = document.createElement('table');
-		newSurveyTable.id = 'surveyTable-' + surveyNumber;
+		newSurveyTable.id = 'surveyTable-' + surveyTracker.survey;
 		newSurveyTable.classList.add('table');
 		newSurveyTable.classList.add('assessment-table');
 			var newTbody = document.createElement('tbody');
 			newSurveyTable.appendChild(newTbody);
 		var surveyPaneContent = document.querySelector('#survey-pane > .tab-content');
 		var pillPane = document.createElement('div');
-			pillPane.id = 'surveyTable-pane-' + surveyNumber;
+			pillPane.id = 'surveyTable-pane-' + surveyTracker.survey;
 			pillPane.classList.add('tab-pane');
 			pillPane.classList.add('fade');
 			pillPane.appendChild(newSurveyTable);
 		surveyPaneContent.appendChild(pillPane);
-		buildAssessments(overlays, surveyNumber);
-		surveyNumber++;
+		buildAssessments(overlays, surveyTracker);
 	});
 
 	var overlays = [];
@@ -129,31 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById('selectedOverlayName').textContent = overlayString;
 		});
 	}
-
-	var ctx = document.getElementById("survey-radar-chart").getContext('2d');
-	var surveyRadarChart = new Chart(ctx, {
-		type: 'radar',
-		data: {
-			labels: [],
-			datasets:[
-				{label:
-					"Survey Assessment Results",
-					"data":[3,4.9,2.5,1.6,4,4,2,3.6],
-					"fill":true,
-					"backgroundColor":"rgba(54, 162, 235, 0.2)",
-					"borderColor":"rgb(54, 162, 235)",
-					"pointBackgroundColor":"rgb(54, 162, 235)",
-					"pointBorderColor":"#fff",
-					"pointHoverBackgroundColor":"#fff",
-					"pointHoverBorderColor":"rgb(54, 162, 235)"
-		}]},
-		options:{
-			"elements":{
-				"line":
-					{"tension":0,"borderWidth":3}
-			}
-		}
-	});	
 	
 	var placeSelect = document.getElementById('place');
 	var placeOption = placeSelect.querySelector(':checked');
@@ -169,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		place.code = currentPlace.dataset.placefp;
 		place.type = currentPlace.dataset.type;
 		document.getElementById('tab-switcher').hidden = false;
-		surveyRadarChart.data.labels = buildAssessments(overlays, 1);
+		buildAssessments(overlays, surveyTracker);
 		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
 		fetch(assessURL).then(function(response) {
 			if(response.ok) {
@@ -209,6 +187,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.getElementById("export-data-url").href = encodeURI(dataURL);
 	});
 	
+
+	var ctx = document.getElementById("survey-radar-chart").getContext('2d');
+	var surveyRadarChart = new Chart(ctx, {
+		type: 'radar',
+		data: {
+			labels: surveyTracker.categories,
+			datasets:[
+				{label:
+					"Survey Assessment Results",
+					"data":[3,4.9,2.5,1.6,4,4,2,3.6],
+					"fill":true,
+					"backgroundColor":"rgba(54, 162, 235, 0.2)",
+					"borderColor":"rgb(54, 162, 235)",
+					"pointBackgroundColor":"rgb(54, 162, 235)",
+					"pointBorderColor":"#fff",
+					"pointHoverBackgroundColor":"#fff",
+					"pointHoverBorderColor":"rgb(54, 162, 235)"
+		}]},
+		options:{
+			"elements":{
+				"line":
+					{"tension":0,"borderWidth":3}
+			}
+		}
+	});		
 
 	/*
 	var geocoder;
@@ -451,37 +454,34 @@ class Assessment {
 	}
 }
 
-function buildAssessments(overlays, sequence) {
+function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
-	var surveyChartLabels = [];
-	console.log(assessment);
-	var primeDataURL = "Survey Name";
-	var surveyTableBody = document.querySelector('#surveyTable-' + sequence + ' > tbody');
+	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	while (surveyTableBody.hasChildNodes()) {
 		surveyTableBody.removeChild(surveyTableBody.lastChild);
 	}
 	for (const key of Object.keys(assessment)) {
 		console.log(key);
-		surveyChartLabels.push(key);
+		surveyTracker.categories.push(key);
 		var size = Object.keys(assessment[key]).length;
 		var questionIterator = 0;
 		for (const q of assessment[key]) {
-			primeDataURL += "\t" + q.question.replace(/<{1}[^<>]{1,}>{1}/g," ");
-			var tr = buildAssessmentQuestion(q, questionIterator, size, key);
+			//primeDataURL += "\t" + q.question.replace(/<{1}[^<>]{1,}>{1}/g," ");
+			var tr = buildAssessmentQuestion(q, questionIterator, size, key, surveyTracker);
 			surveyTableBody.appendChild(tr);
-			questionNumber++;
+			surveyTracker.question++;
 			questionIterator++;
 		}
 	}
-	document.getElementById("export-data-url").dataset.template = primeDataURL + "\n";
-	return surveyChartLabels;
+	surveyTracker.survey++;
+	//document.getElementById("export-data-url").dataset.template = primeDataURL + "\n";
 }
 
-function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
+function buildAssessmentQuestion(q, questionIterator, subsectionSize, key, surveyTracker) {
 	var questionRow = document.createElement("tr");
 	if (questionIterator === 0) {
 		var questionHeader = document.createElement("th");
-		if (questionNumber === 1) {
+		if (surveyTracker.question === 1) {
 			questionHeader.classList.add('first-row');
 		}
 		questionHeader.rowSpan = subsectionSize;
@@ -497,18 +497,18 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
 	questionRow.appendChild(titleTd);
 	var inputTd = document.createElement("td");
 	inputTd.classList.add('survey-input');
-	if (questionNumber === 1) {
+	if (surveyTracker.question === 1) {
 		inputTd.classList.add('first-row');
 	}
 	if (q.type === "likert") {
 		var stronglyDisagree = document.createElement("input");
 			stronglyDisagree.type = "radio";
-			stronglyDisagree.name = `survey-${questionNumber}`;
+			stronglyDisagree.name = `survey-${surveyTracker.question}`;
 			stronglyDisagree.value = "-2";
-			//stronglyDisagree.id = "strongly-disagree-" + questionNumber;
+			//stronglyDisagree.id = "strongly-disagree-" + surveyTracker.question;
 		//inputTd.appendChild(stronglyDisagree);
 		var sdLabel = document.createElement("label");
-			//sdLabel.htmlFor = "strongly-disagree-" + questionNumber;
+			//sdLabel.htmlFor = "strongly-disagree-" + surveyTracker.question;
 				var sdLabelText = document.createTextNode("Strongly Disagree");
 			sdLabel.appendChild(stronglyDisagree);
 			sdLabel.appendChild(sdLabelText);
@@ -516,12 +516,12 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
 
 		var disagree = document.createElement("input");
 			disagree.type = "radio";
-			disagree.name = `survey-${questionNumber}`;
+			disagree.name = `survey-${surveyTracker.question}`;
 			disagree.value = "-1";
-			//disagree.id = "disagree-" + questionNumber;
+			//disagree.id = "disagree-" + surveyTracker.question;
 		//inputTd.appendChild(disagree);
 		var dLabel = document.createElement("label");
-			//dLabel.htmlFor = "disagree-" + questionNumber;
+			//dLabel.htmlFor = "disagree-" + surveyTracker.question;
 				var dLabelText = document.createTextNode("Disagree");
 			dLabel.appendChild(disagree);
 			dLabel.appendChild(dLabelText);
@@ -529,12 +529,12 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
 		
 		var neutral = document.createElement("input");
 			neutral.type = "radio";
-			neutral.name = `survey-${questionNumber}`;
+			neutral.name = `survey-${surveyTracker.question}`;
 			neutral.value = "0";
-			//neutral.id = "neutral-" + questionNumber;
+			//neutral.id = "neutral-" + surveyTracker.question;
 		//inputTd.appendChild(neutral);
 		var nLabel = document.createElement("label");
-			//nLabel.htmlFor = "neutral-" + questionNumber;
+			//nLabel.htmlFor = "neutral-" + surveyTracker.question;
 				var nLabelText = document.createTextNode("Neutral");
 			nLabel.appendChild(neutral);
 			nLabel.appendChild(nLabelText);
@@ -542,12 +542,12 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
 		
 		var agree = document.createElement("input");
 			agree.type = "radio";
-			agree.name = `survey-${questionNumber}`;
+			agree.name = `survey-${surveyTracker.question}`;
 			agree.value = "1";
-			//agree.id = "agree-" + questionNumber;
+			//agree.id = "agree-" + surveyTracker.question;
 		//inputTd.appendChild(agree);
 		var aLabel = document.createElement("label");
-			//aLabel.htmlFor = "agree-" + questionNumber;
+			//aLabel.htmlFor = "agree-" + surveyTracker.question;
 				var aLabelText = document.createTextNode("Agree");
 			aLabel.appendChild(agree);
 			aLabel.appendChild(aLabelText);
@@ -555,12 +555,12 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
 		
 		var stronglyAgree = document.createElement("input");
 			stronglyAgree.type = "radio";
-			stronglyAgree.name = `survey-${questionNumber}`;
+			stronglyAgree.name = `survey-${surveyTracker.question}`;
 			stronglyAgree.value = "1";
-			//stronglyAgree.id = "agree-" + questionNumber;
+			//stronglyAgree.id = "agree-" + surveyTracker.question;
 		//inputTd.appendChild(stronglyAgree);
 		var saLabel = document.createElement("label");
-			//saLabel.htmlFor = "strongly-agree-" + questionNumber;
+			//saLabel.htmlFor = "strongly-agree-" + surveyTracker.question;
 				var saLabelText = document.createTextNode("Strongly Agree");
 			saLabel.appendChild(stronglyAgree);
 			saLabel.appendChild(saLabelText);
