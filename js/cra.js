@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		place.code = currentPlace.dataset.placefp;
 		place.type = currentPlace.dataset.type;
 		document.getElementById('tab-switcher').hidden = false;
+		document.getElementById('survey-pane').hidden = false;
 		buildAssessments(overlays, surveyTracker);
 		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
 		fetch(assessURL).then(function(response) {
@@ -556,7 +557,7 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key, surve
 		var stronglyAgree = document.createElement("input");
 			stronglyAgree.type = "radio";
 			stronglyAgree.name = `survey-${surveyTracker.question}`;
-			stronglyAgree.value = "1";
+			stronglyAgree.value = "2";
 			//stronglyAgree.id = "agree-" + surveyTracker.question;
 		//inputTd.appendChild(stronglyAgree);
 		var saLabel = document.createElement("label");
