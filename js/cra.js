@@ -456,17 +456,17 @@ class Assessment {
 
 function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
+	var questionManifest = [];
 	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	while (surveyTableBody.hasChildNodes()) {
 		surveyTableBody.removeChild(surveyTableBody.lastChild);
 	}
 	for (const key of Object.keys(assessment)) {
-		console.log(key);
 		surveyTracker.categories.push(key);
 		var size = Object.keys(assessment[key]).length;
 		var questionIterator = 0;
 		for (const q of assessment[key]) {
-			//primeDataURL += "\t" + q.question.replace(/<{1}[^<>]{1,}>{1}/g," ");
+			if(surveyTracker.questions.length === 0) {questionManifest.push([q.question.replace(/<{1}[^<>]{1,}>{1}/g," ")]);}
 			var tr = buildAssessmentQuestion(q, questionIterator, size, key, surveyTracker);
 			surveyTableBody.appendChild(tr);
 			surveyTracker.question++;
@@ -474,7 +474,7 @@ function buildAssessments(overlays, surveyTracker) {
 		}
 	}
 	surveyTracker.survey++;
-	//document.getElementById("export-data-url").dataset.template = primeDataURL + "\n";
+	if(surveyTracker.questions.length === 0) {surveyTracker.questions = questionManifest;}
 }
 
 function buildAssessmentQuestion(q, questionIterator, subsectionSize, key, surveyTracker) {
