@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			pillPane.classList.add('fade');
 			pillPane.appendChild(newSurveyTable);
 		surveyPaneContent.appendChild(pillPane);
-		buildAssessments(surveyNumber);
+		buildAssessments(overlays, surveyNumber);
 		surveyNumber++;
 	});
 
@@ -130,6 +130,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var surveyRadarChart = new Chart(ctx, {
+		type: 'radar',
+		data: {
+			labels: [],
+			datasets:[
+				{label:
+					"Survey Assessment Results",
+					"data":[3,4.9,2.5,1.6,4,4,2,3.6],
+					"fill":true,
+					"backgroundColor":"rgba(54, 162, 235, 0.2)",
+					"borderColor":"rgb(54, 162, 235)",
+					"pointBackgroundColor":"rgb(54, 162, 235)",
+					"pointBorderColor":"#fff",
+					"pointHoverBackgroundColor":"#fff",
+					"pointHoverBorderColor":"rgb(54, 162, 235)"
+		}]},
+		options:{
+			"elements":{
+				"line":
+					{"tension":0,"borderWidth":3}
+			}
+		}
+	});	
+	
 	var placeSelect = document.getElementById('place');
 	var placeOption = placeSelect.querySelector(':checked');
 	var place = {
@@ -143,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		var currentPlace = placeSelect.querySelector(':checked');
 		place.code = currentPlace.dataset.placefp;
 		place.type = currentPlace.dataset.type;
+		document.getElementById('tab-switcher').hidden = false;
+		surveyRadarChart.data.labels = buildAssessments(overlays, 1);
 		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
 		fetch(assessURL).then(function(response) {
 			if(response.ok) {
@@ -153,7 +180,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			var populationString = profile.population.toLocaleString();
 			document.getElementById('jurisdiction-name').textContent = profile.jurisdiction.place.name + ' Resilience Profile'
 			document.getElementById('total-population').textContent = 'Population: ' + populationString;
-			document.getElementById('tab-switcher').hidden = false;
 			document.getElementById('report-header').hidden = false;
 			populateDataFramework(profile.data);
 		}).catch(function(error) {
@@ -365,26 +391,181 @@ function populateDataFramework(dataFramework) {
 	});
 }
 
-/*function populateDataFramework (data) {
-	console.log(data);
-	var dataPane = document.querySelector('#data-pane');
-	while (dataPane.hasChildNodes()) {
-		dataPane.removeChild(dataPane.lastChild);
+class Assessment {
+    constructor(overlays) {
+		this["Connection and Caring"] = [
+			{question: "People in my community feel like they belong to the community.", type: "likert"},
+			{question: "People in my community are committed to the well-being of the community.", type: "likert"},
+			{question: "People in my community have hope about the future.", type: "likert"},
+			{question: "People in my community help each other.", type: "likert"},
+			{question: "My community treats people fairly no matter what their background is.", type: "likert"}
+		];
+		this["Resources"] = [
+			{question: "My community supports programs for children and families.", type: "likert"},
+			{question: "My community has resources it needs to take care of community problems (resources include, for example, money, information, technology, tools, raw materials, and services).", type: "likert"},
+			{question: "My community has effective leaders.", type: "likert"},
+			{question: "People in my community are able to get the services they need.", type: "likert"},
+			{question: "People in my community know where to go to get things done.", type: "likert"}
+		];
+		this["Transformative Potential"] = [
+			{question: "My community works with organizations and agencies outside the community to get things done.", type: "likert"},
+			{question: "People in my community communicate with leaders who can help improve the community.", type: "likert"},
+			{question: "People in my community work together to improve the community.", type: "likert"},
+			{question: "My community looks at its successes and failures so it can learn from the past.", type: "likert"},
+			{question: "My community develops skills and finds resources to solve its problems and reach its goals.", type: "likert"},
+			{question: "My community has priorities and sets goals for the future.", type: "likert"}
+		];
+		this["Disaster Management"] = [
+			{question: "My community tries to prevent disasters.", type: "likert"},
+			{question: "My community actively prepares for future disasters.", type: "likert"},
+			{question: "My community can provide emergency services during a disaster.", type: "likert"},
+			{question: "My community has services and programs to help people after a disaster.", type: "likert"}
+		];
+		this["Information and Comm."] = [
+			{question: "My community keeps people informed (for example, via television, radio, newspaper, Internet, phone, neighbors) about issues that are relevant to them.", type: "likert"},
+			{question: "If a disaster occurs, my community provides information about what to do.", type: "likert"},
+			{question: "I get information/communication through my community to help with my home and work life.", type: "likert"},
+			{question: "People in my community trust public officials.", type: "likert"}
+		];
+		
+		if(overlays.includes("radicalization")) {
+			this["People"] = [
+				{question: "<b>Social Networks & Trust:</b> Trusting relationships among community members built upon a shared history, mutual obligations, opportunities to exchange information, and that foster the formation of new, and strengthen existing, connections.", type: "likert"},
+				{question: "<b>Participation & Willingness to Act for the Common Good:</b> Individual capacity, desire, and ability to participate, communicate, and work to improve the community; meaningful participation by local/indigenous leadership; involvement in the community such as through local community and social organizations and participation in the political process.", type: "likert"},
+				{question: "<b>Norms & Culture:</b> Broadly accepted behaviors to which people generally conform that promote health, wellness and safety among all community residents; discourage behaviors that inflict emotional or physical distress on others; and reward behaviors that positively affect others; Norms include values and practices stemming from belief systems that are often linked to those core personal characteristics from which identity derives.", type: "likert"}
+			];
+			this["place"] = [
+				{question: "<b>What’s Sold & How It’s Promoted:</b> availability and promotion of safe, healthy, affordable, culturally appropriate products and services (e.g. food, pharmacies, books and school supplies, sports equipment, arts and crafts supplies, and other recreational items); and the limited promotion, availability, and concentration of potentially harmful products and services (e.g. tobacco, firearms, alcohol, and other drugs).", type: "likert"},
+				{question: "<b>Look, Feel & Safety:</b> Surroundings that are wellmaintained, appealing, perceived to be safe and culturally inviting for all residents.", type: "likert"},
+				{question: "<b>Parks and Open Space:</b> Availability and access to safe, clean parks, green space and open areas that appeal to interests and activities across the generations.", type: "likert"},
+				{question: "<b>Getting Around:</b> Availability of safe, reliable, accessible and affordable ways for people to move around, including public transit, walking, biking and using devices that aid mobility.", type: "likert"},
+				{question: "<b>Housing:</b> High-quality, safe and affordable housing that is accessible for residents with mixed income levels.", type: "likert"},
+				{question: "<b>Air, Water & Soil:</b> Safe and non-toxic water, soil, indoor and outdoor air.", type: "likert"},
+				{question: "<b>Arts & Cultural Expression:</b> Abundant opportunities exist within the community for cultural and artistic expression and participation, and for positive cultural values to be expressed through the arts; and arts and culture positively reflect and value the backgrounds of all community residents.", type: "likert"}
+			];
+			this["Opportunity"] = [
+				{question: "<b>Living Wages and Local Wealth:</b> Local ownership of assets; accessible local employment that pays living wages and salaries; and access to investment opportunities.", type: "likert"},
+				{question: "<b>Education:</b> High quality, accessible education and literacy development for all ages that effectively serves all learners.", type: "likert"}
+			];
+		}
 	}
-	data.forEach(function(section, si) {
-		var sectionHeading = document.createElement('h3');
-			sectionHeading.id = 'data-heading-' + si;
-			var sectionHeadingText = document.createTextNode(Object.keys(section)[0]);
-		sectionHeading.appendChild(sectionHeadingText);
-		dataPane.appendChild(sectionHeading);
-		section[Object.keys(section)[0]].forEach(function(newTableObject, six, section) {
-			console.log(newTableObject);
-			var tableName = Object.keys(newTableObject)[0];
-			var table = document.createElement("table");
-				table.id = tableName + "-table";
-				table.classList.add('table');
-				table.classList.add('table-striped');
-			dataPane.appendChild(table);
-		});
-	});
-}*/
+}
+
+function buildAssessments(overlays, sequence) {
+	var assessment = new Assessment(overlays);
+	var surveyChartLabels = [];
+	console.log(assessment);
+	var primeDataURL = "Survey Name";
+	var surveyTableBody = document.querySelector('#surveyTable-' + sequence + ' > tbody');
+	while (surveyTableBody.hasChildNodes()) {
+		surveyTableBody.removeChild(surveyTableBody.lastChild);
+	}
+	for (const key of Object.keys(assessment)) {
+		console.log(key);
+		surveyChartLabels.push(key);
+		var size = Object.keys(assessment[key]).length;
+		var questionIterator = 0;
+		for (const q of assessment[key]) {
+			primeDataURL += "\t" + q.question.replace(/<{1}[^<>]{1,}>{1}/g," ");
+			var tr = buildAssessmentQuestion(q, questionIterator, size, key);
+			surveyTableBody.appendChild(tr);
+			questionNumber++;
+			questionIterator++;
+		}
+	}
+	document.getElementById("export-data-url").dataset.template = primeDataURL + "\n";
+	return surveyChartLabels;
+}
+
+function buildAssessmentQuestion(q, questionIterator, subsectionSize, key) {
+	var questionRow = document.createElement("tr");
+	if (questionIterator === 0) {
+		var questionHeader = document.createElement("th");
+		if (questionNumber === 1) {
+			questionHeader.classList.add('first-row');
+		}
+		questionHeader.rowSpan = subsectionSize;
+		var headerTitle = document.createTextNode(key);
+		questionHeader.appendChild(headerTitle);
+		questionRow.appendChild(questionHeader);
+	}
+	var titleTd = document.createElement("td");
+	titleTd.classList.add('survey-question');
+	//var questionTitle = document.createTextNode(q.question);
+	titleTd.innerHTML = q.question;
+	//titleTd.appendChild(questionTitle);
+	questionRow.appendChild(titleTd);
+	var inputTd = document.createElement("td");
+	inputTd.classList.add('survey-input');
+	if (questionNumber === 1) {
+		inputTd.classList.add('first-row');
+	}
+	if (q.type === "likert") {
+		var stronglyDisagree = document.createElement("input");
+			stronglyDisagree.type = "radio";
+			stronglyDisagree.name = `survey-${questionNumber}`;
+			stronglyDisagree.value = "-2";
+			//stronglyDisagree.id = "strongly-disagree-" + questionNumber;
+		//inputTd.appendChild(stronglyDisagree);
+		var sdLabel = document.createElement("label");
+			//sdLabel.htmlFor = "strongly-disagree-" + questionNumber;
+				var sdLabelText = document.createTextNode("Strongly Disagree");
+			sdLabel.appendChild(stronglyDisagree);
+			sdLabel.appendChild(sdLabelText);
+		inputTd.appendChild(sdLabel);
+
+		var disagree = document.createElement("input");
+			disagree.type = "radio";
+			disagree.name = `survey-${questionNumber}`;
+			disagree.value = "-1";
+			//disagree.id = "disagree-" + questionNumber;
+		//inputTd.appendChild(disagree);
+		var dLabel = document.createElement("label");
+			//dLabel.htmlFor = "disagree-" + questionNumber;
+				var dLabelText = document.createTextNode("Disagree");
+			dLabel.appendChild(disagree);
+			dLabel.appendChild(dLabelText);
+		inputTd.appendChild(dLabel);
+		
+		var neutral = document.createElement("input");
+			neutral.type = "radio";
+			neutral.name = `survey-${questionNumber}`;
+			neutral.value = "0";
+			//neutral.id = "neutral-" + questionNumber;
+		//inputTd.appendChild(neutral);
+		var nLabel = document.createElement("label");
+			//nLabel.htmlFor = "neutral-" + questionNumber;
+				var nLabelText = document.createTextNode("Neutral");
+			nLabel.appendChild(neutral);
+			nLabel.appendChild(nLabelText);
+		inputTd.appendChild(nLabel);
+		
+		var agree = document.createElement("input");
+			agree.type = "radio";
+			agree.name = `survey-${questionNumber}`;
+			agree.value = "1";
+			//agree.id = "agree-" + questionNumber;
+		//inputTd.appendChild(agree);
+		var aLabel = document.createElement("label");
+			//aLabel.htmlFor = "agree-" + questionNumber;
+				var aLabelText = document.createTextNode("Agree");
+			aLabel.appendChild(agree);
+			aLabel.appendChild(aLabelText);
+		inputTd.appendChild(aLabel);
+		
+		var stronglyAgree = document.createElement("input");
+			stronglyAgree.type = "radio";
+			stronglyAgree.name = `survey-${questionNumber}`;
+			stronglyAgree.value = "1";
+			//stronglyAgree.id = "agree-" + questionNumber;
+		//inputTd.appendChild(stronglyAgree);
+		var saLabel = document.createElement("label");
+			//saLabel.htmlFor = "strongly-agree-" + questionNumber;
+				var saLabelText = document.createTextNode("Strongly Agree");
+			saLabel.appendChild(stronglyAgree);
+			saLabel.appendChild(saLabelText);
+		inputTd.appendChild(saLabel);
+	}
+	questionRow.appendChild(inputTd);
+	return questionRow;
+}
