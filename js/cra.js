@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
-	var ctx = document.getElementById("myChart").getContext('2d');
+	var ctx = document.getElementById("assessment-chart").getContext('2d');
 	var surveyRadarChart = new Chart(ctx, {
 		type: 'radar',
 		data: {
