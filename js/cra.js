@@ -614,3 +614,17 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key, surve
 	questionRow.appendChild(inputTd);
 	return questionRow;
 }
+
+function addressLookup(event) {
+	console.log(event.target);
+	if(event.target.dataset.address) {
+		if(event.target.dataset.address === event.target.textContent) {
+			return;
+		} else {
+			event.target.dataset.address = event.target.textContent;
+		}
+	} else {
+		event.target.dataset.address = event.target.textContent;
+	}
+	console.log(event.target.dataset.address);
+}
