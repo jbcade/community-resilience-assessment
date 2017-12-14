@@ -210,6 +210,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			"elements":{
 				"line":
 					{"tension":0,"borderWidth":3}
+			},
+			"scale": {
+				"ticks": {
+					"stepSize": 0.5,
+					"suggestedMin": -2,
+					"suggestedMax": 2
+				}
 			}
 		}
 	});		
