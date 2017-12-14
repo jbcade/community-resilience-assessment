@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 		surveyRadarChart.data.datasets[0].data = datapoints;
 		console.log(datapoints);
-		surveyRadarChart.update();
+		//surveyRadarChart.update();
 	});	
 
 	/*
