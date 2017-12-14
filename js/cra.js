@@ -301,10 +301,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     var options = {
 		height: '500px',
-		width: '1100px'
+		width: '1070px'
 	};
-
-    // initialize your network!
     var ecomap = new vis.Network(ecomapContainer, data, options);
 });
 
