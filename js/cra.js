@@ -300,8 +300,8 @@ document.addEventListener("DOMContentLoaded", function() {
         edges: edges
     };
     var options = {
-		height: '100%',
-		width: '100%'
+		height: '500px',
+		width: '1100px'
 	};
 
     // initialize your network!
