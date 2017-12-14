@@ -490,14 +490,14 @@ class Assessment {
 
 function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
-	var categoryManifest = [];
+	var surveyTracker.categories = [];
 	var questionManifest = [];
 	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	while (surveyTableBody.hasChildNodes()) {
 		surveyTableBody.removeChild(surveyTableBody.lastChild);
 	}
 	for (const key of Object.keys(assessment)) {
-		categoryManifest.push(key);
+		surveyTracker.categories.push(key);
 		var size = Object.keys(assessment[key]).length;
 		var questionIterator = 0;
 		for (const q of assessment[key]) {
@@ -509,8 +509,6 @@ function buildAssessments(overlays, surveyTracker) {
 		}
 	}
 	surveyTracker.survey++;
-	if(surveyTracker.categories.length === 0) {surveyTracker.categories = categoryManifest;}
-	console.log(surveyTracker.categories);
 	if(surveyTracker.questions.length === 0) {surveyTracker.questions = questionManifest;}
 }
 
