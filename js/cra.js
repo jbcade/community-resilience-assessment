@@ -214,6 +214,32 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});		
 
+	$('#activate-vulnerability-tab').on('shown.bs.tab', function (e) {
+		var datapoints = [];
+		surveyTracker.categories.forEach(function(category) {
+			var values = null;
+			var categoryQuestions = document.querySelectorAll("[data-category='" + category + "']");
+			var total = categoryQuestions.length;
+			categoryQuestions.forEach(function(question) {
+				var selectedOption = question.querySelector('input:checked');
+				if(selectedOption) {
+					var value = question.querySelector('input:checked').value;
+					if(value) {
+						values += parseInt(value);
+					}
+				}
+			});
+			if(values !== null) {
+				datapoints.push(values/total);
+			} else {
+				datapoints.push(null);
+			}
+		});
+		surveyRadarChart.data.datasets[0].data = datapoints;
+		console.log(datapoints);
+		surveyRadarChart.update();
+	});	
+
 	/*
 	var geocoder;
 	var map;
