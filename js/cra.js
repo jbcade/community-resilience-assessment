@@ -524,6 +524,7 @@ function buildAssessmentQuestion(q, questionIterator, subsectionSize, key, surve
 	questionRow.appendChild(titleTd);
 	var inputTd = document.createElement("td");
 	inputTd.classList.add('survey-input');
+	inputTd.dataset.category = key;
 	if (surveyTracker.question === 1) {
 		inputTd.classList.add('first-row');
 	}
