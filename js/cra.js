@@ -361,6 +361,15 @@ function populateDataFramework(dataFramework) {
 						helpTr.appendChild(helpTh);
 					thead.appendChild(helpTr);
 				var tbody = document.createElement("tbody");
+				if(dataTable[tableName]["dataset"].length === 0) {
+					var placeholderDatapoints = [];
+					for(var phi = 0; len = dataTable[tableName]["variables"].length; phi++) {
+						placeholderDatapoints.push("");
+					}
+					dataTable[tableName]["dataset"] = [
+						{"name":"", "datapoints":placeholderDatapoints}
+					];
+				}
 				dataTable[tableName]["dataset"].forEach(function(category, dsi) {
 					var bodyTr = document.createElement('tr');
 						var bodyTh = document.createElement('th');
