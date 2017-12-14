@@ -9,6 +9,7 @@
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/cra.css" rel="stylesheet">
+	<link href="css/vis.min.css" rel="stylesheet">
 </header>
 <body>
 	<div class="container">	
@@ -87,13 +88,13 @@
 				<a class="nav-link" data-toggle="tab" href="#map-pane" role="tab" id="activate-map-tab">Infrastructure Maps</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link disabled" data-toggle="tab" href="#stakeholder-pane" role="tab">Stakeholder Analysis</a>
+				<a class="nav-link" data-toggle="tab" href="#stakeholder-pane" role="tab">Stakeholder Analysis/Ecomap</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" href="#swot-pane" role="tab">SWOT Analysis</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#vulnerability-pane" role="tab" id="activate-vulnerability-tab">Capacity and Vulnerability Assessment</a>
+				<a class="nav-link" data-toggle="tab" href="#vulnerability-pane" role="tab" id="activate-vulnerability-tab">Capacity/Vulnerability Assessment</a>
 			</li>
 		</ul>
 		
@@ -130,6 +131,17 @@
 			</div>
 			<div id="map-pane" class="tab-pane tool-pane" role="tabpanel">
 				<div id="map"></div>
+			</div>
+			<div id="stakeholder-pane" class="tab-pane tool-pane" role="tabpanel">
+				<div class="row align-items-start">
+					<div class="col col-md-12">
+						<div class="card">
+						  <div class="card-block">
+							<div id="ecomap"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div id="swot-pane" class="tab-pane tool-pane" role="tabpanel">
 				<table id="swotTable" class="table table-bordered">
@@ -229,6 +241,7 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="js/cra.js"></script>
 	<script src="js/chart.bundle.min.js"></script>
+	<script src="js/vis.min.js"></script>
 	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=INSERT-KEY-HERE&&callback=initMap"></script>-->
 </body>
 </html>
