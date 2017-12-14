@@ -490,7 +490,7 @@ class Assessment {
 
 function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
-	surveyTracker.categories = [];
+	//surveyTracker.categories = [];
 	var questionManifest = [];
 	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	while (surveyTableBody.hasChildNodes()) {
