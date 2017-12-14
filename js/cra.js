@@ -510,6 +510,7 @@ function buildAssessments(overlays, surveyTracker) {
 	}
 	surveyTracker.survey++;
 	if(surveyTracker.categories.length === 0) {surveyTracker.categories = categoryManifest;}
+	console.log(surveyTracker.categories);
 	if(surveyTracker.questions.length === 0) {surveyTracker.questions = questionManifest;}
 }
 
