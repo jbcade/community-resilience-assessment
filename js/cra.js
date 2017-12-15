@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var surveyRadarChart = new Chart(ctx, {
 		type: 'radar',
 		data: {
-			labels: surveyTracker.categories,
+			labels: [],
 			datasets:[
 				{label:
 					"Survey Assessment Results",
@@ -243,9 +243,11 @@ document.addEventListener("DOMContentLoaded", function() {
 				console.log(datapoints);
 			}
 		});
+		surveyRadarChart.data.labels = surveyTracker.categories;
 		surveyRadarChart.data.datasets[0].data = datapoints;
 		console.log("Final Array: " + datapoints);
 		surveyRadarChart.update();
+		console.log(surveyRadarChart);
 	});	
 
 	/*
