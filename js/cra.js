@@ -548,7 +548,11 @@ function buildAssessments(overlays, surveyTracker) {
 		}
 	}*/
 	var newSurveyButtonWrapper = document.getElementById('survey-list');
-		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
+		//if(surveyTracker.survery = 1) {
+			newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');			
+		//} else {
+		//	newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
+		//}
 		var newSurveyTable = document.createElement('table');
 			newSurveyTable.id = 'surveyTable-' + surveyTracker.survey;
 			newSurveyTable.classList.add('table');
