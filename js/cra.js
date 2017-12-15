@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			var values = null;
 			var categoryQuestions = document.querySelectorAll("[data-category='" + category + "']");
 			var total = categoryQuestions.length;
-			console.log("Number of Matches: " + total);
+			console.log(total);
 			categoryQuestions.forEach(function(question) {
 				var selectedOption = question.querySelector('input:checked');
 				if(selectedOption) {
@@ -237,10 +237,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 			if(values !== null) {
 				datapoints.push(values/total);
-				console.log("Final push: " + datapoints);
+				console.log(datapoints);
 			} else {
 				datapoints.push(null);
-				console.log("it was null: " + datapoints);
+				console.log(datapoints);
 			}
 		});
 		surveyRadarChart.data.datasets[0].data = datapoints;
