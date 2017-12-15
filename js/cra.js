@@ -564,7 +564,7 @@ function buildAssessments(overlays, surveyTracker) {
 			pillPane.id = 'surveyTable-pane-' + surveyTracker.survey;
 			pillPane.classList.add('tab-pane');
 			pillPane.classList.add('fade');
-			if(surveyTracker.survey === 1)
+			if(surveyTracker.survey === 1) {
 				pillPane.classList.add('show');
 				pillPane.classList.add('active');
 			}
