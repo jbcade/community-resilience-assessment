@@ -548,7 +548,7 @@ function buildAssessments(overlays, surveyTracker) {
 		}
 	}*/
 	var newSurveyButtonWrapper = document.getElementById('survey-list');
-		//if(surveyTracker.survery = 1) {
+		//if(surveyTracker.survery === 1) {
 			newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');			
 		//} else {
 		//	newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
@@ -564,6 +564,10 @@ function buildAssessments(overlays, surveyTracker) {
 			pillPane.id = 'surveyTable-pane-' + surveyTracker.survey;
 			pillPane.classList.add('tab-pane');
 			pillPane.classList.add('fade');
+			if(surveyTracker.survey === 1)
+				pillPane.classList.add('show');
+				pillPane.classList.add('active');
+			}
 			pillPane.appendChild(newSurveyTable);
 		surveyPaneContent.appendChild(pillPane);
 	for (const key of Object.keys(assessment)) {
