@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var surveyTracker = new SurveyTracker;
 	var newSurveyButton = document.getElementById('new-survey');
 	newSurveyButton.addEventListener('click', function(event) {
-		event.preventDefault();
+		event.preventDefault();/*
 		var newSurveyButtonWrapper = document.getElementById('survey-list');
 		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
 		var newSurveyTable = document.createElement('table');
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			pillPane.classList.add('tab-pane');
 			pillPane.classList.add('fade');
 			pillPane.appendChild(newSurveyTable);
-		surveyPaneContent.appendChild(pillPane);
+		surveyPaneContent.appendChild(pillPane);*/
 		buildAssessments(overlays, surveyTracker);
 	});
 
@@ -541,12 +541,27 @@ function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
 	surveyTracker.categories = [];
 	var questionManifest = [];
-	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
+	/*var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	if(surveyTableBody !== null) {
 		while (surveyTableBody.hasChildNodes()) {
 			surveyTableBody.removeChild(surveyTableBody.lastChild);
 		}
-	}
+	}*/
+	var newSurveyButtonWrapper = document.getElementById('survey-list');
+		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
+		var newSurveyTable = document.createElement('table');
+			newSurveyTable.id = 'surveyTable-' + surveyTracker.survey;
+			newSurveyTable.classList.add('table');
+			newSurveyTable.classList.add('assessment-table');
+				var newTbody = document.createElement('tbody');
+			newSurveyTable.appendChild(newTbody);
+		var surveyPaneContent = document.querySelector('#survey-pane > .tab-content');
+		var pillPane = document.createElement('div');
+			pillPane.id = 'surveyTable-pane-' + surveyTracker.survey;
+			pillPane.classList.add('tab-pane');
+			pillPane.classList.add('fade');
+			pillPane.appendChild(newSurveyTable);
+		surveyPaneContent.appendChild(pillPane);
 	for (const key of Object.keys(assessment)) {
 		surveyTracker.categories.push(key);
 		var size = Object.keys(assessment[key]).length;
@@ -554,7 +569,8 @@ function buildAssessments(overlays, surveyTracker) {
 		for (const q of assessment[key]) {
 			if(surveyTracker.questions.length === 0) {questionManifest.push([q.question.replace(/<{1}[^<>]{1,}>{1}/g," ")]);}
 			var tr = buildAssessmentQuestion(q, questionIterator, size, key, surveyTracker);
-			surveyTableBody.appendChild(tr);
+			//surveyTableBody.appendChild(tr);
+			newTbody.appendChild(tr);
 			surveyTracker.question++;
 			questionIterator++;
 		}
