@@ -541,23 +541,12 @@ function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
 	surveyTracker.categories = [];
 	var questionManifest = [];
-	/*var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
-	if(surveyTableBody !== null) {
-		while (surveyTableBody.hasChildNodes()) {
-			surveyTableBody.removeChild(surveyTableBody.lastChild);
-		}
-	}*/
 	var newSurveyButtonWrapper = document.getElementById('survey-list');
-		//if(surveyTracker.survery === 1) {
-			var previousActive = newSurveyButtonWrapper.querySelector('.active');
-			console.log(previousActive);
-			if(previousActive !== null) {
-				previousActive.classList.remove('active');	
-			}
-			newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');			
-		//} else {
-		//	newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
-		//}
+		var previousActive = newSurveyButtonWrapper.querySelector('.active');
+		if(previousActive !== null) {
+			previousActive.classList.remove('active');	
+		}
+		newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');
 		var newSurveyTable = document.createElement('table');
 			newSurveyTable.id = 'surveyTable-' + surveyTracker.survey;
 			newSurveyTable.classList.add('table');
