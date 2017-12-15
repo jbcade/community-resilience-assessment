@@ -552,7 +552,7 @@ function buildAssessments(overlays, surveyTracker) {
 			var previousActive = newSurveyButtonWrapper.querySelector('.active');
 			console.log(previousActive);
 			if(previousActive !== null) {
-				previousActive.classlist.remove('active');	
+				previousActive.classList.remove('active');	
 			}
 			newSurveyButtonWrapper.insertAdjacentHTML('beforeend', '<li class="nav-item"><a class="nav-link active" data-toggle="pill" contenteditable href="#surveyTable-pane-' + surveyTracker.survey + '">Participant ' + surveyTracker.survey + '</a></li>');			
 		//} else {
