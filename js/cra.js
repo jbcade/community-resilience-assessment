@@ -549,7 +549,8 @@ function buildAssessments(overlays, surveyTracker) {
 	}*/
 	var newSurveyButtonWrapper = document.getElementById('survey-list');
 		//if(surveyTracker.survery === 1) {
-			var previousActive = newSurveyButtonWrapper.querySelector('nav-link active');
+			var previousActive = newSurveyButtonWrapper.querySelector('active');
+			console.log(previousActive);
 			if(previousActive !== null) {
 				previousActive.classlist.remove('active');	
 			}
