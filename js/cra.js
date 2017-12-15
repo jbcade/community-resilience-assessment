@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			datasets:[
 				{label:
 					"Survey Assessment Results",
-					"data":[3,4.9,2.5,1.6,4,4,2,3.6],
+					"data":[],
 					"fill":true,
 					"backgroundColor":"rgba(54, 162, 235, 0.2)",
 					"borderColor":"rgb(54, 162, 235)",
@@ -227,24 +227,29 @@ document.addEventListener("DOMContentLoaded", function() {
 			var values = null;
 			var categoryQuestions = document.querySelectorAll("[data-category='" + category + "']");
 			var total = categoryQuestions.length;
+			console.log("Number of Matches: " + total);
 			categoryQuestions.forEach(function(question) {
 				var selectedOption = question.querySelector('input:checked');
 				if(selectedOption) {
 					var value = question.querySelector('input:checked').value;
+					console.log("Selected Value: " + value);
 					if(value) {
 						values += parseInt(value);
+						console.log("Values added to: " + values);
 					}
 				}
 			});
 			if(values !== null) {
 				datapoints.push(values/total);
+				console.log("Final push: " + datapoints);
 			} else {
 				datapoints.push(null);
+				console.log("it was null: " + datapoints);
 			}
 		});
 		surveyRadarChart.data.datasets[0].data = datapoints;
-		console.log(datapoints);
-		//surveyRadarChart.update();
+		console.log("Final Array: " + datapoints);
+		surveyRadarChart.update();
 	});	
 
 	/*
@@ -529,7 +534,7 @@ class Assessment {
 
 function buildAssessments(overlays, surveyTracker) {
 	var assessment = new Assessment(overlays);
-	//surveyTracker.categories = [];
+	surveyTracker.categories = [];
 	var questionManifest = [];
 	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
 	while (surveyTableBody.hasChildNodes()) {
