@@ -537,8 +537,10 @@ function buildAssessments(overlays, surveyTracker) {
 	surveyTracker.categories = [];
 	var questionManifest = [];
 	var surveyTableBody = document.querySelector('#surveyTable-' + surveyTracker.survey + ' > tbody');
-	while (surveyTableBody.hasChildNodes()) {
-		surveyTableBody.removeChild(surveyTableBody.lastChild);
+	if(surveyTableBody.hasChildNodes()) {
+		while (surveyTableBody.hasChildNodes()) {
+			surveyTableBody.removeChild(surveyTableBody.lastChild);
+		}
 	}
 	for (const key of Object.keys(assessment)) {
 		surveyTracker.categories.push(key);
