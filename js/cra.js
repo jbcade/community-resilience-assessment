@@ -79,12 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	});
 	
-	var surveyTracker = {
-		question: 1,
-		questions: [],
-		survey: 1,
-		categories: []
-	};
+	var surveyTracker = new SurveyTracker;
 	var newSurveyButton = document.getElementById('new-survey');
 	newSurveyButton.addEventListener('click', function(event) {
 		event.preventDefault();
@@ -148,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		place.type = currentPlace.dataset.type;
 		document.getElementById('tab-switcher').hidden = false;
 		document.getElementById('survey-pane').hidden = false;
+		surveyTracker = new SurveyTracker;
 		buildAssessments(overlays, surveyTracker);
 		var assessURL = encodeURI(backend + 'assess?state-abbr=' + state.abbreviation + '&state-fips=' + state.code + '&state-name=' + state.name + '&county-fips=' + county.code + '&county-name=' + county.name + '&place-fips=' + place.code + '&place-type=' +  place.type + '&place-name=' + place.name + '&overlays=' + JSON.stringify(overlays));
 		fetch(assessURL).then(function(response) {
@@ -529,6 +525,15 @@ class Assessment {
 				{question: "<b>Education:</b> High quality, accessible education and literacy development for all ages that effectively serves all learners.", type: "likert"}
 			];
 		}
+	}
+}
+
+class SurveyTracker {
+	constructor(overlays) {
+		question: 1,
+		questions: [],
+		survey: 1,
+		categories: []
 	}
 }
 
