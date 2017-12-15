@@ -530,10 +530,10 @@ class Assessment {
 
 class SurveyTracker {
 	constructor(overlays) {
-		question = 1,
-		questions = [],
-		survey = 1,
-		categories = []
+		this.question = 1,
+		this.questions = [],
+		this.survey = 1,
+		this.categories = []
 	}
 }
 
