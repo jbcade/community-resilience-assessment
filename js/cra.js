@@ -1,8 +1,7 @@
 var map;
+var geocoder = new google.maps.Geocoder();
 
 document.addEventListener("DOMContentLoaded", function() {
-	var geocoder = new google.maps.Geocoder();
-	var map;
 	const backend = 'https://us-central1-exemplary-rex-97621.cloudfunctions.net/Community-Resilience-Assessment/';
 	var stateSelect = document.getElementById('state');
 	var stateOption = stateSelect.querySelector(':checked');
@@ -164,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
-		initMap(geocoder,state.abbreviation,county.name,place.name);
+		initMap(state.abbreviation,county.name,place.name);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -298,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var ecomap = new vis.Network(ecomapContainer, data, options);
 });
 
-function initMap(geocoder,state,county,place) {
+function initMap(state,county,place) {
 	var address = "";
 	if(place !== 'None') {
 		address = place;
@@ -314,8 +313,8 @@ function initMap(geocoder,state,county,place) {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			console.log(map.fitBounds(bounds));
-			console.log(map);
+			console.log(bounds);
+			console.log(results[0].geometry.location);
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
