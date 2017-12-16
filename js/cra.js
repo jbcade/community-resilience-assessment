@@ -1,4 +1,4 @@
-var map;
+var infrastructureMap;
 var geocoder;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -256,8 +256,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	});	
 
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
-		google.maps.event.trigger(map, 'resize');
-		console.log(JSON.stringify(map.getCenter()));
+		google.maps.event.trigger(infrastructureMap, 'resize');
+		console.log(JSON.stringify(infrastructureMap.getCenter()));
 		console.log('Map resized');
 	})
 	
@@ -311,17 +311,18 @@ function initMap(state,county,place) {
 			console.log(JSON.stringify(results[0]));
 			var bounds = new google.maps.LatLngBounds();
 			bounds = results[0].geometry.viewport;
-			map = new google.maps.Map(document.getElementById('map'), {
+			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
 			console.log(JSON.stringify(bounds));
 			console.log(JSON.stringify(results[0].geometry.location));
-			map.fitBounds(bounds);
-			console.log(JSON.stringify(map.getCenter()));
+			infrastructureMap.fitBounds(bounds);
+			console.log(JSON.stringify(infrastructureMap.getCenter()));
+			return;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
-			map = new google.maps.Map(document.getElementById('map'), {
+			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 39.5, lng: -98.35},
 				zoom: 10
   			});
