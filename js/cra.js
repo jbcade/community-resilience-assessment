@@ -253,24 +253,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log(surveyRadarChart);
 	});	
 
-	var geocoder;
-	var map;
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(map, 'resize');
 		console.log('Map resized');
-		var address = document.getElementById('address').value;
-		geocoder.geocode( { 'address': address}, function(results, status) {
-		  if (status == 'OK') {
-			//map.setCenter(results[0].geometry.location);
-			var marker = new google.maps.Marker({
-				map: map,
-				icon: 'hospitals.png',
-				position: results[0].geometry.location
-			});
-		  } else {
-			alert('Geocode was not successful for the following reason: ' + status);
-		  }
-		});
 	})
 	
 	var multiselects = document.getElementsByClassName('multiselect');
