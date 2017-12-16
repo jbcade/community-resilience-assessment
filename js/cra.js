@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(map, 'resize');
-		console.log(map.getCenter());
+		console.log(JSON.stringify(map.getCenter()));
 		console.log('Map resized');
 	})
 	
@@ -318,7 +318,7 @@ function initMap(state,county,place) {
 			console.log(JSON.stringify(bounds));
 			console.log(JSON.stringify(results[0].geometry.location));
 			map.fitBounds(bounds);
-			console.log(map.getCenter());
+			console.log(JSON.stringify(map.getCenter()));
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
