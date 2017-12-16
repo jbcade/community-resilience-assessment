@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
-		map = initMap(geocoder,state.abbreviation,county.name,place.name);
+		initMap(geocoder,state.abbreviation,county.name,place.name);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -308,15 +308,16 @@ function initMap(geocoder,state,county,place) {
 			console.log(results[0]);
 			var bounds = new google.maps.LatLngBounds();
 			bounds = results[0].geometry.viewport;
-			var newMap = new google.maps.Map(document.getElementById('map'), {
+			map = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
 			newMap.fitBounds(bounds);
+			console.log(bounds);
 			return newMap;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
-			return new google.maps.Map(document.getElementById('map'), {
+			map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 39.150389, lng: -77.415864},
 				zoom: 10
   			});
