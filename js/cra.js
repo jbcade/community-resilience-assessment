@@ -316,6 +316,7 @@ function initMap(state,county,place) {
   			});
 			console.log(bounds);
 			console.log(results[0].geometry.location);
+			map.fitBounds(location);
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
@@ -323,6 +324,7 @@ function initMap(state,county,place) {
 				zoom: 10
   			});
 		}
+		return;
 	});
 }
 
