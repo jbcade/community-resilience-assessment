@@ -301,9 +301,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function initMap(state,county,place) {
 	var address = "";
 	if(place !== 'None') {
-		address = place;
+		address = place + ", " + state + " USA";
 	} else {
-		address = county;
+		address = county + ", " + state + " USA";
 	}		
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == 'OK') {
