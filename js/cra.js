@@ -1,7 +1,8 @@
 var map;
-var geocoder = new google.maps.Geocoder();
+var geocoder;
 
 document.addEventListener("DOMContentLoaded", function() {
+	geocoder = new google.maps.Geocoder();
 	const backend = 'https://us-central1-exemplary-rex-97621.cloudfunctions.net/Community-Resilience-Assessment/';
 	var stateSelect = document.getElementById('state');
 	var stateOption = stateSelect.querySelector(':checked');
