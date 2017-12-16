@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
-		map = initMap(state.name,county.name,place.name);
+		map = initMap(geocoder,state.name,county.name,place.name);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -311,12 +311,12 @@ document.addEventListener("DOMContentLoaded", function() {
     var ecomap = new vis.Network(ecomapContainer, data, options);
 });
 
-function initMap(state,county,place) {
+function initMap(geocoder,state,county,place) {
 	var address = "";
 	if(place !== 'None') {
-		address = place.name;
+		address = place;
 	} else {
-		address = county.name;
+		address = county;
 	}		
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == 'OK') {
