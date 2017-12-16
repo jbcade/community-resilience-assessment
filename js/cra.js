@@ -307,16 +307,16 @@ function initMap(state,county,place) {
 	}		
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == 'OK') {
-			console.log(results[0]);
+			console.log(JSON.stringify(results[0]));
 			var bounds = new google.maps.LatLngBounds();
 			bounds = results[0].geometry.viewport;
 			map = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			console.log(bounds);
-			console.log(results[0].geometry.location);
-			map.fitBounds(location);
+			console.log(JSON.stringify(bounds));
+			console.log(JSON.stringify(results[0].geometry.location));
+			map.fitBounds(bounds);
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
