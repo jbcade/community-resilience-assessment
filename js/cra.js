@@ -312,7 +312,7 @@ function initMap(geocoder,state,county,place) {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			map.fitBounds(bounds);
+			//map.fitBounds(bounds);
 			console.log(bounds);
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
