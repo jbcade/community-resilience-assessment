@@ -312,9 +312,8 @@ function initMap(geocoder,state,county,place) {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			newMap.fitBounds(bounds);
+			map.fitBounds(bounds);
 			console.log(bounds);
-			return newMap;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
