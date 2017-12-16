@@ -159,7 +159,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			populateDataFramework(profile.data);
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
-		});		
+		});
+		var address = "";
+		if(place.name !== 'None) {
+		   address = place.name;
+		} else {
+		   address = county.name;
+		}
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		  if (status == 'OK') {
+			console.log(results[0]);
+			map.setCenter(results[0].geometry.location);
+		  } else {
+			console.log('Geocode was not successful for the following reason: ' + status);
+		  }
+		});
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
