@@ -306,7 +306,8 @@ function initMap(geocoder,state,county,place) {
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == 'OK') {
 			console.log(results[0]);
-			var bounds = results[0].geometry.viewport;
+			var bounds = new google.maps.LatLngBounds();
+			bounds = results[0].geometry.viewport;
 			var newMap = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
 				zoom: 10
