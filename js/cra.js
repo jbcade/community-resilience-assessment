@@ -264,7 +264,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log(surveyRadarChart);
 	});	
 
-	/*
 	var geocoder;
 	var map;
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
@@ -283,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			alert('Geocode was not successful for the following reason: ' + status);
 		  }
 		});
-	})*/
+	})
 	
 	var multiselects = document.getElementsByClassName('multiselect');
 	for (var i = 0, len = multiselects.length; i < len; i++) {
