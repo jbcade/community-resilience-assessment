@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 	var generateButton = document.getElementById('generate');
 	generate.addEventListener('click', function() {
-		place.name = placeSelect.value.replace(' CDP, '');
+		place.name = placeSelect.value.replace(' CDP', '');
 		var currentPlace = placeSelect.querySelector(':checked');
 		place.code = currentPlace.dataset.placefp;
 		place.type = currentPlace.dataset.type;
