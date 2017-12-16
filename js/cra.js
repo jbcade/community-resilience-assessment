@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+	var geocoder = new google.maps.Geocoder();
+	var map;
 	const backend = 'https://us-central1-exemplary-rex-97621.cloudfunctions.net/Community-Resilience-Assessment/';
 	var stateSelect = document.getElementById('state');
 	var stateOption = stateSelect.querySelector(':checked');
@@ -160,20 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
-		var address = "";
-		if(place.name !== 'None') {
-		   address = place.name;
-		} else {
-		   address = county.name;
-		}
-		geocoder.geocode( { 'address': address}, function(results, status) {
-		  if (status == 'OK') {
-			console.log(results[0]);
-			map.setCenter(results[0].geometry.location);
-		  } else {
-			console.log('Geocode was not successful for the following reason: ' + status);
-		  }
-		});
+		map = initMap(state.name,county.name,place.name);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -321,6 +310,27 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
     var ecomap = new vis.Network(ecomapContainer, data, options);
 });
+
+function initMap(state,county,place) {
+	var address = "";
+	if(place !== 'None') {
+		address = place.name;
+	} else {
+		address = county.name;
+	}		
+	geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == 'OK') {
+			console.log(results[0]);
+			map.setCenter(results[0].geometry.location);
+		} else {
+			console.log('Geocode was not successful for the following reason: ' + status);
+		}
+	});
+	return new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 39.150389, lng: -77.415864},
+		zoom: 10
+  	});
+}
 
 function populateDataFramework(dataFramework) {
 	var dataPane = document.querySelector('#data-pane');
