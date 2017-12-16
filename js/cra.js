@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 	var generateButton = document.getElementById('generate');
 	generate.addEventListener('click', function() {
-		place.name = placeSelect.value;
+		place.name = placeSelect.value.replace(' CDP, '');
 		var currentPlace = placeSelect.querySelector(':checked');
 		place.code = currentPlace.dataset.placefp;
 		place.type = currentPlace.dataset.type;
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
 		var address = "";
-		if(place.name !== 'None) {
+		if(place.name !== 'None') {
 		   address = place.name;
 		} else {
 		   address = county.name;
