@@ -1,3 +1,5 @@
+var map;
+
 document.addEventListener("DOMContentLoaded", function() {
 	var geocoder = new google.maps.Geocoder();
 	var map;
@@ -312,12 +314,12 @@ function initMap(geocoder,state,county,place) {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			//map.fitBounds(bounds);
-			console.log(bounds);
+			console.log(map.fitBounds(bounds));
+			console.log(map);
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
 			map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 39.150389, lng: -77.415864},
+				center: {lat: 39.5, lng: -98.35},
 				zoom: 10
   			});
 		}
