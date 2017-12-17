@@ -459,8 +459,8 @@ function populateDataFramework(dataFramework) {
 							var innerTd = document.createElement('td');
 							innerTd.setAttribute("contentEditable", true);
 							if (dataTypes[dix] === 'address') {
-								innerTd.classList.address = "";
-								innerTd.classList.type = dataTable[tableName];
+								innerTd.classList.add('address');
+								innerTd.dataset.type = dataTable[tableName];
 								innerTd.dataset.id = uniqueID;
 								uniqueID++;
 								innerTd.addEventListener('blur', addressLookup);
@@ -491,9 +491,9 @@ var cloneRow = function(event) {
 	var addressInput = clonedNode.querySelector('.address');
 	if(addressInput !== null) {
 		addressInput.addEventListener('blur', addressLookup);
-		innerTd.dataset.id = uniqueID;
+		addressInput.dataset.id = uniqueID;
 		uniqueID++;
-		innerTd.classList.address = "";
+		addressInput.dataset.address = "";
 	}
 	referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
 }
