@@ -1,4 +1,3 @@
-var infrastructureMap;
 var geocoder;
 var jurisdictionBounds;
 
@@ -300,36 +299,12 @@ document.addEventListener("DOMContentLoaded", function() {
     var ecomap = new vis.Network(ecomapContainer, data, options);
 });
 
-function initMap(state,county,place) {
-	var address = "";
-	if(place !== 'None') {
-		address = place + ", " + state + " USA";
-	} else {
-		address = county + ", " + state + " USA";
-	}		
-	geocoder.geocode( { 'address': address}, function(results, status) {
-		if (status == 'OK') {
-			console.log(JSON.stringify(results[0]));
-			jurisdictionBounds = new google.maps.LatLngBounds();
-			jurisdictionBounds = results[0].geometry.viewport;
-			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
-				center: results[0].geometry.location,
-				zoom: 10
-  			});
-			console.log(JSON.stringify(jurisdictionBounds));
-			console.log(JSON.stringify(results[0].geometry.location));
-			infrastructureMap.fitBounds(jurisdictionBounds);
-			console.log(JSON.stringify(infrastructureMap.getCenter()));
-			return;
-		} else {
-			console.log('Geocode was not successful for the following reason: ' + status);
-			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 39.5, lng: -98.35},
-				zoom: 10
-  			});
-		}
-		return;
-	});
+function initMap() {
+	infrastructureMap = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 39.5, lng: -98.35},
+		zoom: 5
+  	});
+	return;
 }
 
 function populateDataFramework(dataFramework) {
