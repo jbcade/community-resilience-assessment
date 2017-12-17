@@ -482,7 +482,7 @@ var cloneRow = function(event) {
 		contentEditables[i].innerHTML = '';
 	}
 	newPlusIcon = clonedNode.querySelector('.add-row').addEventListener('click', cloneRow);
-	newMinusIcon = clonedNode.querySelector('.add-row').addEventListener('click', deleteRow);
+	newMinusIcon = clonedNode.querySelector('.remove-row').addEventListener('click', deleteRow);
 	referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
 }
 
