@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		}).catch(function(error) {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
-		initMap(state.abbreviation,county.name,place.name);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
