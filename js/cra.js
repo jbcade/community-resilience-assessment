@@ -260,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		google.maps.event.trigger(infrastructureMap, 'resize');
 		console.log(JSON.stringify(infrastructureMap.getCenter()));
 		console.log('Map resized');
+		infrastructureMap.fitBounds(jurisdictionBounds);
 	})
 	
 	var multiselects = document.getElementsByClassName('multiselect');
