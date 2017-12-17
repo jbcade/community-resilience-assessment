@@ -1,6 +1,8 @@
 var infrastructureMap;
 var geocoder;
 var jurisdictionBounds;
+var markers = {};
+var uniqueID = 0;
 
 document.addEventListener("DOMContentLoaded", function() {
 	geocoder = new google.maps.Geocoder();
@@ -458,6 +460,8 @@ function populateDataFramework(dataFramework) {
 							innerTd.setAttribute("contentEditable", true);
 							if (dataTypes[dix] === 'address') {
 								innerTd.classList.add('address');
+								innerTd.dataset.id = uniqueID;
+								uniqueID++;
 								innerTd.addEventListener('blur', addressLookup);
 							}
 								var innerTdText = document.createTextNode(datapoint);
@@ -711,4 +715,31 @@ function addressLookup(event) {
 		event.target.dataset.address = event.target.textContent;
 	}
 	console.log(event.target.dataset.address);
+	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
+		if (status == 'OK') {
+			console.log(JSON.stringify(results[0]));
+			setMarker(results[0].geometry.location, event.target.dataset.id);
+			return;
+		} else {
+			console.log('Geocode was not successful for the following reason: ' + status);
+		}
+		return;
+	});
+}
+
+function removeMarker(markerId) { 
+    if(markers[markerId]){
+        markers[markerId].setMap(null);
+        delete markers[markerId];
+    }
+}
+
+function setMarker(position, markerId) {
+    removeMarker(markerId);
+    var temp_marker = new google.maps.Marker({
+        position: position
+    });
+    temp_marker.setMap(infrastructureMap);
+    temp_marker.metadata = { id: markerId };
+    markers[markerId] = temp_marker;
 }
