@@ -441,16 +441,7 @@ function populateDataFramework(dataFramework) {
 								plusIcon.classList.add('add-row');
 								var plusIconText = document.createTextNode('add_circle');
 								plusIcon.appendChild(plusIconText);
-								plusIcon.addEventListener('click', function(event) {
-									console.log(event.target.parentNode.parentNode);
-									var referenceNode = event.target.parentNode.parentNode;
-									var clonedNode = referenceNode.cloneNode(true);
-									var contentEditables = clonedNode.querySelectorAll('[contenteditable]');
-									for (var i = 0; i < contentEditables.length; i++) {
-										contentEditables[i].innerHTML = '';
-									}
-									referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
-								});
+								plusIcon.addEventListener('click', cloneRow);
 							rowControls.appendChild(plusIcon);
 							var minusIcon = document.createElement('i');
 								minusIcon.classList.add('material-icons');
@@ -458,11 +449,7 @@ function populateDataFramework(dataFramework) {
 								//minusIcon.classList.add('float-right');
 								var minusIconText = document.createTextNode('remove_circle');
 								minusIcon.appendChild(minusIconText);
-								minusIcon.addEventListener('click', function(event) {
-									var killRow = event.target.parentNode.parentNode;
-									console.log(killRow);
-									killRow.parentNode.removeChild(killRow);
-								});
+								minusIcon.addEventListener('click', killRow);
 							rowControls.appendChild(minusIcon);
 						bodyTr.appendChild(rowControls);
 						var datapoints = category.datapoints;
@@ -484,6 +471,25 @@ function populateDataFramework(dataFramework) {
 			dataPane.appendChild(table);
 		});
 	});
+}
+
+var cloneRow = function(event) {
+	console.log(event.target.parentNode.parentNode);
+	var referenceNode = event.target.parentNode.parentNode;
+	var clonedNode = referenceNode.cloneNode(true);
+	var contentEditables = clonedNode.querySelectorAll('[contenteditable]');
+	for (var i = 0; i < contentEditables.length; i++) {
+		contentEditables[i].innerHTML = '';
+	}
+	newPlusIcon = clonedNode.querySelector('.add-row').addEventListener('click', cloneRow);
+	newMinusIcon = clonedNode.querySelector('.add-row').addEventListener('click', deleteRow);
+	referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
+}
+
+var killRow = function(event) {
+	var killRow = event.target.parentNode.parentNode;
+	console.log(killRow);
+	killRow.parentNode.removeChild(killRow);
 }
 
 class Assessment {
