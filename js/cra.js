@@ -314,11 +314,11 @@ function initMap(state,county,place) {
 			jurisdictionBounds = results[0].geometry.viewport;
 			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
-				zoom: 10
+				zoom: 18
   			});
 			console.log(JSON.stringify(jurisdictionBounds));
 			console.log(JSON.stringify(results[0].geometry.location));
-			infrastructureMap.fitBounds(jurisdictionBounds);
+			//infrastructureMap.fitBounds(jurisdictionBounds);
 			console.log(JSON.stringify(infrastructureMap.getCenter()));
 			return;
 		} else {
