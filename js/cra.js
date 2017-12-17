@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(infrastructureMap, 'resize');
-		console.log(infrastructureMap.getCenter());
+		console.log(JSON.stringify(infrastructureMap.getCenter()));
 		console.log('Map resized');
 	})
 	
@@ -301,9 +301,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function initMap() {
 	infrastructureMap = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 39.5, lng: -98.35},
-		zoom: 5
+		zoom: 10
   	});
-	console.log(infrastructureMap.getCenter());
+	console.log(JSON.stringify(infrastructureMap.getCenter()));
 	return;
 }
 
