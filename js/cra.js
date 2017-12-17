@@ -1,5 +1,6 @@
 var infrastructureMap;
 var geocoder;
+var jurisdictionBounds;
 
 document.addEventListener("DOMContentLoaded", function() {
 	geocoder = new google.maps.Geocoder();
@@ -165,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
 		initMap(state.abbreviation,county.name,place.name);
-		console.log(infrastructureMap);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(infrastructureMap, 'resize');
-		console.log(JSON.stringify(infrastructureMap));
+		console.log(infrastructureMap);
 		console.log('Map resized');
 	})
 	
@@ -310,15 +310,15 @@ function initMap(state,county,place) {
 	geocoder.geocode( { 'address': address}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
-			var bounds = new google.maps.LatLngBounds();
-			bounds = results[0].geometry.viewport;
+			jurisdictionBounds = new google.maps.LatLngBounds();
+			jurisdictionBounds = results[0].geometry.viewport;
 			infrastructureMap = new google.maps.Map(document.getElementById('map'), {
 				center: results[0].geometry.location,
 				zoom: 10
   			});
-			console.log(JSON.stringify(bounds));
+			console.log(JSON.stringify(jurisdictionBounds));
 			console.log(JSON.stringify(results[0].geometry.location));
-			infrastructureMap.fitBounds(bounds);
+			infrastructureMap.fitBounds(jurisdictionBounds);
 			console.log(JSON.stringify(infrastructureMap.getCenter()));
 			return;
 		} else {
