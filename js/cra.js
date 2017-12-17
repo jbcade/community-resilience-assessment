@@ -459,7 +459,8 @@ function populateDataFramework(dataFramework) {
 							var innerTd = document.createElement('td');
 							innerTd.setAttribute("contentEditable", true);
 							if (dataTypes[dix] === 'address') {
-								innerTd.classList.add('address');
+								innerTd.classList.address = "";
+								innerTd.classList.type = dataTable[tableName];
 								innerTd.dataset.id = uniqueID;
 								uniqueID++;
 								innerTd.addEventListener('blur', addressLookup);
@@ -485,8 +486,15 @@ var cloneRow = function(event) {
 	for (var i = 0; i < contentEditables.length; i++) {
 		contentEditables[i].innerHTML = '';
 	}
-	newPlusIcon = clonedNode.querySelector('.add-row').addEventListener('click', cloneRow);
-	newMinusIcon = clonedNode.querySelector('.remove-row').addEventListener('click', killRow);
+	clonedNode.querySelector('.add-row').addEventListener('click', cloneRow);
+	clonedNode.querySelector('.remove-row').addEventListener('click', killRow);
+	var addressInput = clonedNode.querySelector('.address');
+	if(addressInput !== null) {
+		addressInput.addEventListener('blur', addressLookup);
+		innerTd.dataset.id = uniqueID;
+		uniqueID++;
+		innerTd.classList.address = "";
+	}
 	referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
 }
 
