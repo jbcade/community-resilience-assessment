@@ -444,7 +444,7 @@ function populateDataFramework(dataFramework) {
 								plusIcon.addEventListener('click', function(event) {
 									console.log(event.target.parentNode.parentNode);
 									var referenceNode = event.target.parentNode.parentNode;
-									var clonedNode = referenceNode.cloneNode();
+									var clonedNode = referenceNode.cloneNode(true);
 									var contentEditables = clonedNode.querySelectorAll('[contenteditable]');
 									for (var i = 0; i < contentEditables.length; i++) {
 										contentEditables[i].innerHTML = '';
