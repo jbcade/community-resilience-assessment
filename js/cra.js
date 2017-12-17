@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log('There has been a problem with your fetch operation: ' + error.message);
 		});
 		initMap(state.abbreviation,county.name,place.name);
+		console.log(infrastructureMap);
 	});
 	
 	var exportSurveyButton = document.getElementById('export-surveys');
@@ -257,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$('#activate-map-tab').on('shown.bs.tab', function (e) {
 		google.maps.event.trigger(infrastructureMap, 'resize');
-		console.log(JSON.stringify(infrastructureMap.getCenter()));
+		console.log(JSON.stringify(infrastructureMap));
 		console.log('Map resized');
 	})
 	
