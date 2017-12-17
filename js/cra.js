@@ -442,22 +442,14 @@ function populateDataFramework(dataFramework) {
 								var plusIconText = document.createTextNode('add_circle');
 								plusIcon.appendChild(plusIconText);
 								plusIcon.addEventListener('click', function(event) {
-									console.log(event.target.parentNode.parentNode.parentNode);
+									console.log(event.target.parentNode.parentNode);
 									var referenceNode = event.target.parentNode.parentNode;
-									var fieldsToAdd = event.target.parentNode.parentNode.parentNode.parentNode.querySelectorAll('thead > tr > th').length-3;
-									var addedTr = document.createElement('tr');
-										var addedTh = document.createElement('th');
-											addedTh.scope = "row";
-											addedTh.setAttribute("contentEditable", true);
-									addedTr.appendChild(addedTh);
-									var addedControls = document.createElement('th');
-									addedTr.appendChild(addedControls);
-									for (var i = 0, len = fieldsToAdd; i < len; i++) {
-										var addedTd = document.createElement('td');
-											addedTd.setAttribute("contentEditable", true);
-										addedTr.appendChild(addedTd);
+									var clonedNode = referencedNode.cloneNode();
+									var contentEditables = clonedNode.querySelectorAll('[contenteditable]');
+									for (var i = 0; i < contentEditables.length; i++) {
+										contentEditables[i].innerHTML = '';
 									}
-									referenceNode.parentNode.insertBefore(addedTr, referenceNode.nextSibling);
+									referenceNode.parentNode.insertBefore(clonedNode, referenceNode.nextSibling);
 								});
 							rowControls.appendChild(plusIcon);
 							var minusIcon = document.createElement('i');
