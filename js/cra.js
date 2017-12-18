@@ -192,7 +192,55 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.getElementById("export-data-url").href = encodeURI(dataURL);
 	});
 	
-
+	var maritalctx = document.getElementById("marital-donut-chart").getContext('2d');
+	var MaritalChartConfig = {
+		type: 'doughnut',
+		data: {
+			datasets: [{
+				data: [
+					43.43,
+					45.82,
+					9.81,
+					3.88,
+					0.94,
+				],
+					backgroundColor: [
+					"#F7464A",
+					"#46BFBD",
+					"#FDB45C",
+					"#949FB1",
+					"#4D5360",
+				],
+			}, {
+				data: [
+					37.85,
+					40.38,
+					15,
+					2.85,
+					6.77,
+				],
+					backgroundColor: [
+					"#F7464A",
+					"#46BFBD",
+					"#FDB45C",
+					"#949FB1",
+					"#4D5360",
+				],
+			}],
+			labels: [
+				"Never Married",
+				"Now Married",
+				"Divorced",
+				"Seperated",
+				"Widowed"
+			]
+		},
+		options: {
+			responsive: true
+		}
+	};
+	var myDoughnut = new Chart(maritalctx, MaritalChartConfig);
+	
 	var ctx = document.getElementById("survey-radar-chart").getContext('2d');
 	var surveyRadarChart = new Chart(ctx, {
 		type: 'radar',
