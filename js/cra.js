@@ -819,7 +819,7 @@ function setMarker(position, markerId) {
 		strokeColor: '',
 		strokeWeight: 0
 	},
-	map_icon_label: '<span class="map-icon map-icon-city-hall"></span>'
+	map_icon_label: '<span class="map-icon map-icon-hospital"></span>'
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
