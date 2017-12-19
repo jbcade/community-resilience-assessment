@@ -809,7 +809,7 @@ function setMarker(position, markerId) {
 
 function setMarker(position, markerId) {
     removeMarker(markerId);
-    var temp_marker = new mapIcons.Marker({
+    var temp_marker = new Marker({
 	map: infrastructureMap,
         position: position,
 	icon: {
