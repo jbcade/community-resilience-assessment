@@ -809,7 +809,7 @@ function setMarker(position, markerId) {
 
 function setMarker(position, markerId) {
     removeMarker(markerId);
-    var temp_marker = new Marker({
+    var temp_marker = new mapIcons.Marker({
 	map: infrastructureMap,
         position: position,
 	icon: {
@@ -819,7 +819,7 @@ function setMarker(position, markerId) {
 		strokeColor: '',
 		strokeWeight: 0
 	},
-	map_icon_label: '<span class="map-icon map-icon-hospital"></span>'
+	map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
