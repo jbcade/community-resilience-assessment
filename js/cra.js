@@ -803,10 +803,12 @@ function removeMarker(markerId) {
 }
 
 function setMarker(position, markerId, markerType) {
+    console.log(markerType);
+    cosole.log(icons[markerType].icon);
     removeMarker(markerId);
     var temp_marker = new google.maps.Marker({
         position: position,
-	icon: icons[markerType].icons
+	icon: icons[markerType].icon
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
