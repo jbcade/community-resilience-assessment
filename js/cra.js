@@ -415,7 +415,7 @@ function populateDataFramework(dataFramework) {
 				var sectionHeadingText = document.createTextNode(sectionName);
 			sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
-		Object.entries(section).forEach(function(dataTable, six) {
+		Object.entries(section[sectionName]).forEach(function(dataTable, six) {
 			var dataTypes = [];
 			console.log(dataTable);
 			var tableName = Object.keys(dataTable)[0];
