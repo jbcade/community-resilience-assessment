@@ -503,6 +503,11 @@ function populateDataFramework(dataFramework) {
 							rowControls.appendChild(minusIcon);
 						bodyTr.appendChild(rowControls);
 						var datapoints = category.datapoints;
+						if(datapoints.length === 0) {
+							for(var phi = 0; phi < dataTable["variables"].length; phi++) {
+								datapoints.push("");
+							}							
+						}
 						datapoints.forEach(function(datapoint, dix) {
 							var innerTd = document.createElement('td');
 							innerTd.setAttribute("contentEditable", true);
