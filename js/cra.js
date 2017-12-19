@@ -409,13 +409,13 @@ function populateDataFramework(dataFramework) {
 		console.log(section);
 		//console.log(Object.keys(dataFramework[si])[0]);
 		//var sectionHeadingString = Object.keys(dataFramework[si])[0];
-		var sectionLabel = Object.keys(section)[0];
+		var sectionName = Object.keys(section)[0];
 		var sectionHeading = document.createElement('h3');
 			sectionHeading.id = 'data-heading-' + si;
 				var sectionHeadingText = document.createTextNode(sectionLabel);
 			sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
-		Object.keys(section[sectionLabel]).forEach(function(dataTable, six) {
+		Object.entries(section).forEach(function(dataTable, six) {
 			var dataTypes = [];
 			console.log(dataTable);
 			var tableName = Object.keys(dataTable)[0];
