@@ -804,7 +804,7 @@ function removeMarker(markerId) {
 
 function setMarker(position, markerId, markerType) {
     console.log(markerType);
-    cosole.log(icons[markerType].icon);
+    console.log(icons[markerType].icon);
     removeMarker(markerId);
     var temp_marker = new google.maps.Marker({
         position: position,
