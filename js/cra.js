@@ -796,11 +796,30 @@ function removeMarker(markerId) {
         delete markers[markerId];
     }
 }
-
+/*
 function setMarker(position, markerId) {
     removeMarker(markerId);
     var temp_marker = new google.maps.Marker({
         position: position
+    });
+    temp_marker.setMap(infrastructureMap);
+    temp_marker.metadata = { id: markerId };
+    markers[markerId] = temp_marker;
+}*/
+
+function setMarker(position, markerId) {
+    removeMarker(markerId);
+    var temp_marker = new Marker({
+	map: infrastructureMap,
+        position: position,
+	icon: {
+		path: MAP_PIN,
+		fillColor: '#6331AE',
+		fillOpacity: 1,
+		strokeColor: '',
+		strokeWeight: 0
+	},
+	map_icon_label: '<span class="map-icon map-icon-city-hall"></span>'
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
