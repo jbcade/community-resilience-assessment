@@ -470,7 +470,7 @@ function populateDataFramework(dataFramework) {
 				var tbody = document.createElement("tbody");
 				if(dataTable["dataset"].length === 0) {
 					var placeholderDatapoints = [];
-					for(var phi = 0; len = dataTable["variables"].length; phi++) {
+					for(var phi = 0; phi < dataTable["variables"].length; phi++) {
 						placeholderDatapoints.push("");
 					}
 					dataTable["dataset"] = [
