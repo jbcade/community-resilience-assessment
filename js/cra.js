@@ -469,10 +469,10 @@ function populateDataFramework(dataFramework) {
 					thead.appendChild(helpTr);
 				var tbody = document.createElement("tbody");
 				if(dataTable["dataset"].length === 0) {
-					var placeholderDatapoints = ["","",""];
-					//for(var phi = 0; len = dataTable["variables"].length; phi++) {
-					//	placeholderDatapoints.push("");
-					//}
+					var placeholderDatapoints = [];
+					for(var phi = 0; len = dataTable["variables"].length; phi++) {
+						placeholderDatapoints.push("");
+					}
 					dataTable["dataset"] = [
 						{"name":"", "datapoints":placeholderDatapoints}
 					];
