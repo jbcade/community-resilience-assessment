@@ -407,8 +407,6 @@ function populateDataFramework(dataFramework) {
 	*/	
 	dataFramework.forEach(function(section, si) {
 		console.log(section);
-		//console.log(Object.keys(dataFramework[si])[0]);
-		//var sectionHeadingString = Object.keys(dataFramework[si])[0];
 		var sectionName = Object.keys(section)[0];
 		var sectionHeading = document.createElement('h3');
 			sectionHeading.id = 'data-heading-' + si;
@@ -418,14 +416,15 @@ function populateDataFramework(dataFramework) {
 		Object.entries(section[sectionName]).forEach(function(dataTable, six) {
 			var dataTypes = [];
 			console.log(dataTable);
-			var tableName = Object.keys(dataTable)[0];
+			var tableName = dataTable[0];
+			dataTable = dataTable[1];
 			var table = document.createElement("table");
 				table.id = tableName + "-table";
 				table.classList.add('table');
 				table.classList.add('table-striped');
 				var thead = document.createElement("thead");
 					var tr = document.createElement("tr");
-						console.log(dataTable[tableName]["variables"]);
+						console.log(dataTable["variables"]);
 						var titleTh = document.createElement("th");
 							var titleThText = document.createTextNode(tableName);
 							titleTh.appendChild(titleThText);
