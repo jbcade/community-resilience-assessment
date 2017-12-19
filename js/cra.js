@@ -3,6 +3,11 @@ var geocoder;
 var jurisdictionBounds;
 var markers = {};
 var uniqueID = 0;
+var icons = {
+	'Hospitals': {icon: 'icons/hospital.png'},
+	'Colleges and Universities': {icon: 'icons/university.png'}
+};
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	geocoder = new google.maps.Geocoder();
@@ -781,7 +786,7 @@ function addressLookup(event) {
 	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
-			setMarker(results[0].geometry.location, event.target.dataset.id);
+			setMarker(results[0].geometry.location, event.target.dataset.id, event.target.dataset.type);
 			return;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
@@ -797,11 +802,11 @@ function removeMarker(markerId) {
     }
 }
 
-function setMarker(position, markerId) {
+function setMarker(position, markerId, markerType) {
     removeMarker(markerId);
     var temp_marker = new google.maps.Marker({
         position: position,
-	icon: 'icons/hospital.png'
+	icon: icons[markerType].icons
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
