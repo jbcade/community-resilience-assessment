@@ -412,7 +412,7 @@ function populateDataFramework(dataFramework) {
 		var sectionName = Object.keys(section)[0];
 		var sectionHeading = document.createElement('h3');
 			sectionHeading.id = 'data-heading-' + si;
-				var sectionHeadingText = document.createTextNode(sectionLabel);
+				var sectionHeadingText = document.createTextNode(sectionName);
 			sectionHeading.appendChild(sectionHeadingText);
 		dataPane.appendChild(sectionHeading);
 		Object.entries(section).forEach(function(dataTable, six) {
