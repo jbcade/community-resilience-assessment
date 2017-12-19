@@ -204,13 +204,14 @@ document.addEventListener("DOMContentLoaded", function() {
 					3.88,
 					0.94,
 				],
-					backgroundColor: [
+				backgroundColor: [
 					"#F7464A",
 					"#46BFBD",
 					"#FDB45C",
 					"#949FB1",
 					"#4D5360",
 				],
+				label: ["Male"]
 			}, {
 				data: [
 					37.85,
@@ -219,13 +220,14 @@ document.addEventListener("DOMContentLoaded", function() {
 					2.85,
 					6.77,
 				],
-					backgroundColor: [
+				backgroundColor: [
 					"#F7464A",
 					"#46BFBD",
 					"#FDB45C",
 					"#949FB1",
 					"#4D5360",
 				],
+				label: ["Female"]
 			}],
 			labels: [
 				"Never Married",
