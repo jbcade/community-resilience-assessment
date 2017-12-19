@@ -800,7 +800,8 @@ function removeMarker(markerId) {
 function setMarker(position, markerId) {
     removeMarker(markerId);
     var temp_marker = new google.maps.Marker({
-        position: position
+        position: position,
+	icon: 'icons/hospital.png'
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
