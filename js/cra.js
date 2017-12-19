@@ -447,7 +447,7 @@ function populateDataFramework(dataFramework) {
 								});
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
-						dataTable[tableName]["variables"].forEach(function(variable) {
+						dataTable["variables"].forEach(function(variable) {
 							dataTypes.push(variable.type);
 							var th = document.createElement("th");
 								thText = document.createTextNode(variable.name);
@@ -457,27 +457,27 @@ function populateDataFramework(dataFramework) {
 					thead.appendChild(tr);
 					var helpTr = document.createElement("tr");
 						var helpTh = document.createElement("th");
-							helpTh.colSpan = dataTable[tableName]["variables"].length + 2;
+							helpTh.colSpan = dataTable["variables"].length + 2;
 							var helpDiv = document.createElement("div");
 								helpDiv.classList.add('alert');
 								helpDiv.classList.add('alert-info');
 								helpDiv.classList.add('helpbox');
 								helpDiv.classList.add('collapsed');
-								helpDiv.innerHTML = dataTable[tableName]["description"];
+								helpDiv.innerHTML = dataTable["description"];
 							helpTh.appendChild(helpDiv);
 						helpTr.appendChild(helpTh);
 					thead.appendChild(helpTr);
 				var tbody = document.createElement("tbody");
-				if(dataTable[tableName]["dataset"].length === 0) {
+				if(dataTable["dataset"].length === 0) {
 					var placeholderDatapoints = ["","",""];
-					//for(var phi = 0; len = dataTable[tableName]["variables"].length; phi++) {
+					//for(var phi = 0; len = dataTable["variables"].length; phi++) {
 					//	placeholderDatapoints.push("");
 					//}
-					dataTable[tableName]["dataset"] = [
+					dataTable["dataset"] = [
 						{"name":"", "datapoints":placeholderDatapoints}
 					];
 				}
-				dataTable[tableName]["dataset"].forEach(function(category, dsi) {
+				dataTable["dataset"].forEach(function(category, dsi) {
 					var bodyTr = document.createElement('tr');
 						var bodyTh = document.createElement('th');
 							bodyTh.scope = "row";
@@ -508,7 +508,7 @@ function populateDataFramework(dataFramework) {
 							innerTd.setAttribute("contentEditable", true);
 							if (dataTypes[dix] === 'address') {
 								innerTd.classList.add('address');
-								innerTd.dataset.type = dataTable[tableName];
+								innerTd.dataset.type = tableName;
 								innerTd.dataset.id = uniqueID;
 								uniqueID++;
 								innerTd.addEventListener('blur', addressLookup);
