@@ -352,6 +352,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     var options = {
+	    		autoResize: false,
 	    		height: '600px',
 	    		width: '1070px',
 			interaction:{hover:true},
