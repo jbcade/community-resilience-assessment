@@ -358,7 +358,15 @@ document.addEventListener("DOMContentLoaded", function() {
 			interaction:{hover:true},
 			manipulation: {
 				enabled: true
-			}
+			},
+	    		nodes: {
+ 				shape: 'box',
+				font: {
+					bold: {
+						color: '#0077aa'
+					}
+				}
+    			}
 		};
 
 	var network = new vis.Network(container, data, options);
