@@ -352,6 +352,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     var options = {
+	    		height: '600px',
+	    		width: '1070px',
 			interaction:{hover:true},
 			manipulation: {
 				enabled: true
