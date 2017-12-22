@@ -2,6 +2,7 @@ var infrastructureMap;
 var geocoder;
 var jurisdictionBounds;
 var markers = {};
+var network;
 var uniqueID = 0;
 var icons = {
 	'Hospitals': {icon: 'icons/hospital.png'},
@@ -320,6 +321,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		infrastructureMap.fitBounds(jurisdictionBounds);
 	})
 	
+	$('#activate-stakeholder-tab').on('shown.bs.tab', function (e) {
+		network.resize('1070px', '600px');
+		network.redraw();
+	})
+	
 	var multiselects = document.getElementsByClassName('multiselect');
 	for (var i = 0, len = multiselects.length; i < len; i++) {
 		multiselects[i].addEventListener('click', function(event) {
@@ -352,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     var options = {
-	    		autoResize: false,
 	    		height: '600px',
 	    		width: '1070px',
 			interaction:{hover:true},
@@ -369,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
     			}
 		};
 
-	var network = new vis.Network(container, data, options);
+	network = new vis.Network(container, data, options);
 });
 
 function initMap(state,county,place) {
