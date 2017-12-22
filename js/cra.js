@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ]);
 
     // create a network
-    var container = document.getElementById('stakeholder-pane');
+    var container = document.getElementById('ecomap');
     var data = {
         nodes: nodes,
         edges: edges
