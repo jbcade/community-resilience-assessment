@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	$('#activate-stakeholder-tab').on('shown.bs.tab', function (e) {
 		setTimeout(function() {
-			network.setSize('600px', '400px');
+			network.setSize('80%', '80%');
 			network.redraw();
 		}, 5000);
 	})
