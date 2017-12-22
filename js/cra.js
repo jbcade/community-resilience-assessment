@@ -322,8 +322,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	})
 	
 	$('#activate-stakeholder-tab').on('shown.bs.tab', function (e) {
-		network.setSize('1070px', '600px');
-		network.redraw();
+		setTimeout(function() {
+			network.setSize('600px', '400px');
+			network.redraw();
+		}, 5000);
 	})
 	
 	var multiselects = document.getElementsByClassName('multiselect');
