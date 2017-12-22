@@ -320,13 +320,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log('Map resized');
 		infrastructureMap.fitBounds(jurisdictionBounds);
 	})
-	
+	/*
 	$('#activate-stakeholder-tab').on('shown.bs.tab', function (e) {
 		setTimeout(function() {
 			network.setSize('80%', '80%');
 			network.redraw();
 		}, 5000);
-	})
+	})*/
 	
 	var multiselects = document.getElementsByClassName('multiselect');
 	for (var i = 0, len = multiselects.length; i < len; i++) {
@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function() {
     ]);
 
     // create a network
-    var container = document.getElementById('ecomap');
+    var container = document.getElementById('stakeholder-pane');
     var data = {
         nodes: nodes,
         edges: edges
