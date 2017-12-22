@@ -327,12 +327,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 	
+    // create an array with nodes
     var nodes = new vis.DataSet([
-        {id: 1, label: 'Node 1'},
-        {id: 2, label: 'Node 2'},
-        {id: 3, label: 'Node 3'},
-        {id: 4, label: 'Node 4'},
-        {id: 5, label: 'Node 5'}
+        {id: 1, label: 'Node 1', title: 'I have a popup!'},
+        {id: 2, label: 'Node 2', title: 'I have a popup!'},
+        {id: 3, label: 'Node 3', title: 'I have a popup!'},
+        {id: 4, label: 'Node 4', title: 'I have a popup!'},
+        {id: 5, label: 'Node 5', title: 'I have a popup!'}
     ]);
 
     // create an array with edges
@@ -344,18 +345,20 @@ document.addEventListener("DOMContentLoaded", function() {
     ]);
 
     // create a network
-    var ecomapContainer = document.getElementById('ecomap');
-
-    // provide the data in the vis format
+    var container = document.getElementById('ecomap');
     var data = {
         nodes: nodes,
         edges: edges
     };
+
     var options = {
-		height: '500px',
-		width: '1070px'
-	};
-    var ecomap = new vis.Network(ecomapContainer, data, options);
+			interaction:{hover:true},
+			manipulation: {
+				enabled: true
+			}
+		};
+
+	var network = new vis.Network(container, data, options);
 });
 
 function initMap(state,county,place) {
