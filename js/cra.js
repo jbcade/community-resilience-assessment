@@ -358,8 +358,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     var options = {
-	    		height: '600px',
-	    		width: '1070px',
+	    		height: '98%',
+	    		width: '98%',
 			interaction:{hover:true},
 			manipulation: {
 				enabled: true
