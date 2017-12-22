@@ -320,13 +320,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log('Map resized');
 		infrastructureMap.fitBounds(jurisdictionBounds);
 	})
-	/*
+
 	$('#activate-stakeholder-tab').on('shown.bs.tab', function (e) {
-		setTimeout(function() {
-			network.setSize('80%', '80%');
 			network.redraw();
-		}, 5000);
-	})*/
+			network.fit();
+	})
 	
 	var multiselects = document.getElementsByClassName('multiselect');
 	for (var i = 0, len = multiselects.length; i < len; i++) {
@@ -377,6 +375,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		};
 
 	network = new vis.Network(container, data, options);
+	network.fit();
 });
 
 function initMap(state,county,place) {
