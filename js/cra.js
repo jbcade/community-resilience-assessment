@@ -443,12 +443,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	var addRowControls = document.getElementsByClassName('add-row');
-	for (var i = 0, len = networkUpdateControls.length; i < len; i++) {
+	for (var i = 0, len = addRowControls.length; i < len; i++) {
         	addRowControls[i].addEventListener('click', addRow);
 	}
 	
 	var killRowControls = document.getElementsByClassName('remove-row');
-	for (var i = 0, len = networkUpdateControls.length; i < len; i++) {
+	for (var i = 0, len = killRowControls.length; i < len; i++) {
         	killRowControls[i].addEventListener('click', killRow);
 	}
 });
