@@ -344,10 +344,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // create an array with edges
     var edges = new vis.DataSet([
-        {from: 1, to: 3},
-        {from: 1, to: 2},
-        {from: 2, to: 4},
-        {from: 2, to: 5}
+        {from: 1, to: 3, color:{color:"green"}, state: 0},
+        {from: 1, to: 2, color:{color:"green"}, state: 0},
+        {from: 2, to: 4, color:{color:"green"}, state: 0},
+        {from: 2, to: 5, color:{color:"green"}, state: 0}
     ]);
 
     // create a network
@@ -379,9 +379,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	network.on("selectEdge", function (edgeEvent) {
 		edgeEvent.event.preventDefault();
         	console.log('selectEdge Event:', edgeEvent);
-		var targetEdge = edgeEvent.edges[0];
-		console.log(edges);
-		edges.update([{id:targetEdge, color:{color:"red"}, state: 1}]);
+		var targetEdgeID = edgeEvent.edges[0];
+		console.log(edges.get(targetEdgeID,{fields: ['id']});
+		edges.update([{id:targetEdgeID, color:{color:"red"}, state: 1}]);
     	});
 	network.fit();
 });
