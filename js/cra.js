@@ -666,7 +666,10 @@ var killRow = function(event) {
 }
 
 var updateNetwork = function(event) {
-	
+	var updateRow = event.target.parentNode.parentNode;
+	console.log(updateRow);
+	var updateId = updateRow.dataset.node;
+	nodes.update({id: updateId, label: "Test" + updateId});
 }
 
 class Assessment {
