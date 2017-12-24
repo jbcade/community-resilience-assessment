@@ -437,6 +437,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
     	});
 	network.fit();
+
+	var helpControls = document.getElementsByClassName('ask-help');
+	for (var i = 0, len = helpControls.length; i < len; i++) {
+        	helpControls[i].addEventListener('click', askHelp);
+	}	
 	
 	var networkUpdateControls = document.getElementsByClassName('update-network');
 	for (var i = 0, len = networkUpdateControls.length; i < len; i++) {
@@ -539,7 +544,7 @@ function populateDataFramework(dataFramework) {
 								//helpIcon.classList.add('float-right');
 								var helpIconText = document.createTextNode('help');
 								helpIcon.appendChild(helpIconText);
-								helpIcon.addEventListener('click', help);
+								helpIcon.addEventListener('click', askHelp);
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
 						dataTable["variables"].forEach(function(variable) {
@@ -626,7 +631,7 @@ function populateDataFramework(dataFramework) {
 	});
 }
 
-var help = function(event) {
+var askHelp = function(event) {
 	var thead = event.target.parentNode.parentNode.parentNode;
 	var helpbox = thead.querySelector('tr:nth-child(2) > th > .helpbox');
 	if (helpbox.classList.contains('collapsed')) {
