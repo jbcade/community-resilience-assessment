@@ -365,7 +365,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				enabled: true
 			},
 	    		nodes: {
- 				shape: 'box',
+ 				shape: 'dot',
+				shadow: true,
 				font: {
 					bold: {
 						color: '#0077aa'
