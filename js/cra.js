@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
     // create an array with nodes
     var nodes = new vis.DataSet([
-        {id: 1, label: '<b>Placeholder</b>\nAdd stakeholders below', shapeProperties: {borderDashes: true}}
+        {id: 1, label: '<b>Placeholder</b>\nAdd stakeholders below'}
     ]);
 
     // create an array with edges
@@ -376,6 +376,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	    		nodes: {
  				shape: 'circle',
 				shadow: true,
+				color: {
+					background: "#f0f8ff"	
+				},
 				font: {
 					multi: 'html'
 				}
@@ -668,11 +671,17 @@ var updateNetwork = function(event) {
 	console.log(updateRow);
 	var updateId = updateRow.dataset.node;
 	var name = document.querySelector('.stakeholder-name').textContent;
+	var titleContent = document.querySelector('.stakeholder-title').textContent;
+	var title = titleContent ? '\n' + titleContent : "";
+	var orgContent = document.querySelector('.stakeholder-org').textContent;
+	var org = orgContent ? '\n' + orgContent : "";
 	console.log(name);
 	if(name) {
-		label = '<b>' + name + '</b>';
+		label = '<b>' + name + '</b>' + title + org;
+	} else {
+		label = '<b>' + org + '</b>';
 	}
-	networkData.nodes.update({id: updateId, label: "Test" + updateId});
+	networkData.nodes.update({id: updateId, label: label});
 }
 
 class Assessment {
