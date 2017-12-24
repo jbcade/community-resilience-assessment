@@ -365,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				enabled: true
 			},
 	    		nodes: {
- 				shape: 'dot',
+ 				shape: 'circle',
 				shadow: true,
 				font: {
 					bold: {
@@ -376,6 +376,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		};
 
 	network = new vis.Network(container, data, options);
+	network.on("selectEdge", function (params) {
+        	console.log('selectEdge Event:', params);
+    	});
 	network.fit();
 });
 
