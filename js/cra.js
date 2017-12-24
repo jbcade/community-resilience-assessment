@@ -376,8 +376,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		};
 
 	network = new vis.Network(container, data, options);
-	network.on("selectEdge", function (params) {
-        	console.log('selectEdge Event:', params);
+	network.on("selectEdge", function (edgeEvent) {
+        	console.log('selectEdge Event:', edgeEvent);
+		var targetEdge = edgeEvent.edges[0];
+		console.log(targetEdge);
+		edges.update([{id:targetEdge, color:{background:"red"}}]);
     	});
 	network.fit();
 });
