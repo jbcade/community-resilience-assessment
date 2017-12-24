@@ -539,15 +539,7 @@ function populateDataFramework(dataFramework) {
 								//helpIcon.classList.add('float-right');
 								var helpIconText = document.createTextNode('help');
 								helpIcon.appendChild(helpIconText);
-								helpIcon.addEventListener('click', function(event) {
-									var thead = event.target.parentNode.parentNode.parentNode;
-									var helpbox = thead.querySelector('tr:nth-child(2) > th > .helpbox');
-									if (helpbox.classList.contains('collapsed')) {
-										helpbox.classList.remove('collapsed');
-									} else {
-										helpbox.classList.add('collapsed');
-									}
-								});
+								helpIcon.addEventListener('click', help);
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
 						dataTable["variables"].forEach(function(variable) {
@@ -632,6 +624,16 @@ function populateDataFramework(dataFramework) {
 			dataPane.appendChild(table);
 		});
 	});
+}
+
+var help = function(event) {
+	var thead = event.target.parentNode.parentNode.parentNode;
+	var helpbox = thead.querySelector('tr:nth-child(2) > th > .helpbox');
+	if (helpbox.classList.contains('collapsed')) {
+		helpbox.classList.remove('collapsed');
+	} else {
+		helpbox.classList.add('collapsed');
+	}
 }
 
 var cloneRow = function(event) {
