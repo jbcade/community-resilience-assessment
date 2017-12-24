@@ -344,10 +344,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // create an array with edges
     var edges = new vis.DataSet([
-        {from: 1, to: 3, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
-        {from: 1, to: 2, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
-        {from: 2, to: 4, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
-        {from: 2, to: 5, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0}
+        {from: 1, to: 3, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
+        {from: 1, to: 2, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
+        {from: 2, to: 4, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
+        {from: 2, to: 5, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0}
     ]);
 
     // create a network
@@ -385,11 +385,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		var edgeState = edges.get(targetEdgeId,{fields: ['state']});
 		var manipulation = {};
 		console.log(edgeState);
-		switch (edgeState) {
+		switch (edgeState.state) {
 			case 0:
-				manipulation = {id:targetEdgeId, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 1};
-				break;
-			case 1:
 				manipulation = {id:targetEdgeId, arrows:{to:{enabled: true},from:{enabled: false}}, color:{color:"grey"}, dashes: true, width: 1, state: 2};
 				break;
 			case 2:
