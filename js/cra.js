@@ -344,10 +344,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // create an array with edges
     var edges = new vis.DataSet([
-        {from: 1, to: 3, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
-        {from: 1, to: 2, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
-        {from: 2, to: 4, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0},
-        {from: 2, to: 5, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0}
+        {from: 1, to: 3},
+        {from: 1, to: 2},
+        {from: 2, to: 4},
+        {from: 2, to: 5}
     ]);
 
     // create a network
@@ -365,7 +365,17 @@ document.addEventListener("DOMContentLoaded", function() {
 				enabled: true
 			},
 	    		edges: {
-				chosen: false
+				chosen: false,
+				arrows: {
+					to:{enabled: true},
+					from:{enabled: true}
+				},
+				color: {
+					color:"grey"
+				},
+	    			dashes: true,
+	    			width: 1,
+				state: 0
 			},
 	    		nodes: {
  				shape: 'circle',
@@ -380,6 +390,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	network = new vis.Network(container, data, options);
 	network.on("click", function (e) {
+		console.log(e);
 		if (e.edges.length > 0) {
 			var targetEdgeId = e.edges[0];
 			console.log(targetEdgeId);
