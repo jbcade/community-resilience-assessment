@@ -379,7 +379,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	network.on("selectEdge", function (edgeEvent) {
         	console.log('selectEdge Event:', edgeEvent);
 		var targetEdge = edgeEvent.edges[0];
-		console.log(targetEdge);
+		console.log(edges);
 		edges.update([{id:targetEdge, color:{background:"red"}}]);
     	});
 	network.fit();
