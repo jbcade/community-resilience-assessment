@@ -377,10 +377,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	network = new vis.Network(container, data, options);
 	network.on("selectEdge", function (edgeEvent) {
-		edgeEvent.event.preventDefault();
-        	console.log('selectEdge Event:', edgeEvent);
 		var targetEdgeID = edgeEvent.edges[0];
-		console.log(edges.get(targetEdgeID,{fields: ['id']}));
+		console.log(edges.get(targetEdgeID,{fields: ['state']}));
 		edges.update([{id:targetEdgeID, color:{color:"red"}, state: 1}]);
     	});
 	network.fit();
