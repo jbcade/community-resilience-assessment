@@ -377,9 +377,7 @@ document.addEventListener("DOMContentLoaded", function() {
  				shape: 'circle',
 				shadow: true,
 				font: {
-					bold: {
-						color: '#0077aa'
-					}
+					multi: 'html'
 				}
     			}
 		};
@@ -669,7 +667,7 @@ var updateNetwork = function(event) {
 	var updateRow = event.target.parentNode.parentNode;
 	console.log(updateRow);
 	var updateId = updateRow.dataset.node;
-	var name = document.queryselector('.stakeholder-name').textContent;
+	var name = document.querySelector('.stakeholder-name').textContent;
 	console.log(name);
 	if(name) {
 		label = '<b>' + name + '</b>';
