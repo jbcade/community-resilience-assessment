@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	var addRowControls = document.getElementsByClassName('add-row');
 	for (var i = 0, len = addRowControls.length; i < len; i++) {
-        	addRowControls[i].addEventListener('click', addRow);
+        	addRowControls[i].addEventListener('click', cloneRow);
 	}
 	
 	var killRowControls = document.getElementsByClassName('remove-row');
