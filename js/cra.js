@@ -336,20 +336,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	
     // create an array with nodes
     var nodes = new vis.DataSet([
-        {id: 1, label: 'Node 1', title: 'I have a popup!'},
-        {id: 2, label: 'Node 2', title: 'I have a popup!'},
-        {id: 3, label: 'Node 3', title: 'I have a popup!'},
-        {id: 4, label: 'Node 4', title: 'I have a popup!'},
-        {id: 5, label: 'Node 5', title: 'I have a popup!'}
+        {id: 1, label: '<b>Placeholder</b>\nAdd stakeholders below', shapeProperties: {borderDashes: true}}
     ]);
 
     // create an array with edges
-    var edges = new vis.DataSet([
-        {from: 1, to: 3},
-        {from: 1, to: 2},
-        {from: 2, to: 4},
-        {from: 2, to: 5}
-    ]);
+    var edges = new vis.DataSet();
 
     // create a network
     var container = document.getElementById('ecomap');
@@ -674,9 +665,15 @@ var killRow = function(event) {
 }
 
 var updateNetwork = function(event) {
+	var label = '';
 	var updateRow = event.target.parentNode.parentNode;
 	console.log(updateRow);
 	var updateId = updateRow.dataset.node;
+	var name = document.queryselector('.stakeholder-name').textContent;
+	console.log(name);
+	if(name) {
+		label = '<b>' + name + '</b>';
+	}
 	networkData.nodes.update({id: updateId, label: "Test" + updateId});
 }
 
