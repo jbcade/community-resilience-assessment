@@ -344,10 +344,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // create an array with edges
     var edges = new vis.DataSet([
-        {from: 1, to: 3, color:{color:"green"}, state: 0},
-        {from: 1, to: 2, color:{color:"green"}, state: 0},
-        {from: 2, to: 4, color:{color:"green"}, state: 0},
-        {from: 2, to: 5, color:{color:"green"}, state: 0}
+        {from: 1, to: 3, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
+        {from: 1, to: 2, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
+        {from: 2, to: 4, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0},
+        {from: 2, to: 5, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, state: 0}
     ]);
 
     // create a network
@@ -364,6 +364,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			manipulation: {
 				enabled: true
 			},
+	    		edges: {
+				chosen: false
+			},
 	    		nodes: {
  				shape: 'circle',
 				shadow: true,
@@ -378,8 +381,42 @@ document.addEventListener("DOMContentLoaded", function() {
 	network = new vis.Network(container, data, options);
 	network.on("selectEdge", function (edgeEvent) {
 		var targetEdgeID = edgeEvent.edges[0];
-		console.log(edges.get(targetEdgeID,{fields: ['state']}));
-		edges.update([{id:targetEdgeID, color:{color:"red"}, state: 1}]);
+		var edgeState = edges.get(targetEdgeID,{fields: ['state']});
+		var manipulation = {};
+		switch (edgeState) {
+			case 0:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 1};
+				break;
+			case 1:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: false}}, color:{color:"grey"}, dashes: true, width: 1, state: 2};
+				break;
+			case 2:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: false},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 3};
+				break;
+			case 3:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"green"}, dashes: false, width: 2, state: 4};
+				break;
+			case 4:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: false}}, color:{color:"green"}, dashes: false, width: 2, state: 5};
+				break;
+			case 5:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: false},from:{enabled: true}}, color:{color:"green"}, dashes: false, width: 2, state: 6};
+				break;
+			case 6:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"red"}, dashes: false, width: 1, state: 7};
+				break;
+			case 7:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: false}}, color:{color:"red"}, dashes: false, width: 1, state: 8};
+				break;
+			case 8:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: false},from:{enabled: true}}, color:{color:"red"}, dashes: false, width: 1, state: 9};
+				break;
+			case 9:
+			default:
+				manipulation = {id:targetEdgeID, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0};
+				break;
+		}
+		edges.update([manipulation]);
     	});
 	network.fit();
 });
