@@ -264,6 +264,7 @@ th > div.alert {
 .ask-help {
 	color:#025aa5;
 	cursor:pointer;
+	vertical-align:bottom;
 }
 
 .ask-help:hover {
