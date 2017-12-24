@@ -362,7 +362,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	    		width: '98%',
 			interaction:{hover:true},
 			manipulation: {
-				enabled: true
+				enabled: true,
+				addNode: false,
+				addEdge: true,
+				editEdge: true,
+				deleteNode: false,
+				deleteEdge: true
 			},
 	    		edges: {
 				chosen: false,
@@ -431,6 +436,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
     	});
 	network.fit();
+	
+	
 });
 
 function initMap(state,county,place) {
