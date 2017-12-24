@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					break;
 				case 8:
 				default:
-					manipulation = {id:targetEdgeId, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 9};
+					manipulation = {id:targetEdgeId, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0};
 					break;
 			}
 			edges.update([manipulation]);
