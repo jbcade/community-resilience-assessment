@@ -630,6 +630,11 @@ var cloneRow = function(event) {
 	}
 	clonedNode.querySelector('.add-row').addEventListener('click', cloneRow);
 	clonedNode.querySelector('.remove-row').addEventListener('click', killRow);
+	if(referenceNode.dataset.node) {
+		clonedNode.dataset.node = uniqueID;
+		uniqueID++;
+		clonedNode.querySelector('.update-network').addEventListener('click', updateNetwork);
+	}
 	var addressInput = clonedNode.querySelector('.address');
 	if(addressInput !== null) {
 		addressInput.addEventListener('blur', addressLookup);
