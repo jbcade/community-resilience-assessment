@@ -3,6 +3,7 @@ var geocoder;
 var jurisdictionBounds;
 var markers = {};
 var network;
+var networkData;
 var uniqueID = 0;
 var icons = {
 	'Hospitals': {icon: 'icons/hospital.png'},
@@ -352,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // create a network
     var container = document.getElementById('ecomap');
-    var data = {
+    networkData = {
         nodes: nodes,
         edges: edges
     };
@@ -392,7 +393,7 @@ document.addEventListener("DOMContentLoaded", function() {
     			}
 		};
 
-	network = new vis.Network(container, data, options);
+	network = new vis.Network(container, networkData, options);
 	network.on("click", function (e) {
 		console.log(e);
 		if (e.items.length > 0 && e.items[0].edgeId !== undefined) {
@@ -432,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					manipulation = {id:targetEdgeId, arrows:{to:{enabled: true},from:{enabled: true}}, color:{color:"grey"}, dashes: true, width: 1, state: 0};
 					break;
 			}
-			edges.update([manipulation]);
+			networkData.edges.update([manipulation]);
 		}
     	});
 	network.fit();
@@ -669,7 +670,7 @@ var updateNetwork = function(event) {
 	var updateRow = event.target.parentNode.parentNode;
 	console.log(updateRow);
 	var updateId = updateRow.dataset.node;
-	nodes.update({id: updateId, label: "Test" + updateId});
+	networkData.nodes.update({id: updateId, label: "Test" + updateId});
 }
 
 class Assessment {
