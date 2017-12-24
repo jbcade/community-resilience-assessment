@@ -294,6 +294,18 @@ th > div.alert {
 	color:#449d44;
 }
 
+.update-network {
+	display:inline;
+	visibility:hidden;
+	opacity:0;
+	color:rgba(34,119,34,1);
+	transition:visibility 0.3s linear, opacity 300ms;
+}
+
+.add-row:hover {
+	color:#449d44;
+}
+
 tr:hover .add-row {
 	cursor:pointer;
 	visibility:visible;
@@ -301,6 +313,12 @@ tr:hover .add-row {
 }
 
 tr:hover .remove-row {
+	cursor:pointer;
+	visibility:visible;
+	opacity:1;
+}
+
+tr:hover .update-network {
 	cursor:pointer;
 	visibility:visible;
 	opacity:1;
