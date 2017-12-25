@@ -337,3 +337,19 @@ tr:hover .update-network {
 	height:600px;
 	/*width:1070px;*/
 }
+
+.government {
+	background-color: #f0f8ff;	
+}
+
+.business {
+	background-color: #98FB98;	
+}
+
+.ngo {
+	background-color: #D8BFD8;
+}
+
+.community {
+	background-color: #FFFFE0;	
+}
