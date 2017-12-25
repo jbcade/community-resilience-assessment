@@ -670,10 +670,10 @@ var updateNetwork = function(event) {
 	var updateRow = event.target.parentNode.parentNode;
 	console.log(updateRow);
 	var updateId = updateRow.dataset.node;
-	var name = document.querySelector('.stakeholder-name').textContent;
-	var titleContent = document.querySelector('.stakeholder-title').textContent;
+	var name = updateRow.querySelector('.stakeholder-name').textContent;
+	var titleContent = updateRow.querySelector('.stakeholder-title').textContent;
 	var title = titleContent ? '\n' + titleContent : "";
-	var orgContent = document.querySelector('.stakeholder-org').textContent;
+	var orgContent = updateRow.querySelector('.stakeholder-org').textContent;
 	var org = orgContent ? '\n' + orgContent : "";
 	console.log(name);
 	if(name) {
