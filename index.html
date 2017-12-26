@@ -165,7 +165,14 @@
 							<th><i class="material-icons add-row">add_circle</i><i class="material-icons remove-row">remove_circle</i><i class="material-icons update-network">pin_drop</i></th>
 							<td class="stakeholder-title" contenteditable="true"></td>
 							<td class="stakeholder-org" contenteditable="true"></td>
-							<td class="stakeholder-type government" contenteditable="true"><i class="material-icons">keyboard_arrow_left</i> Government <i class="material-icons">keyboard_arrow_right</i></td>
+							<td class="stakeholder-type">
+								<select name="stakeholder-type">
+									<option value="government" selected>Government</option>
+									<option value="business">Business</option>
+									<option value="ngo">NGO</option>
+									<option value="community">Community</option>
+								</select>	
+							</td>
 							<td class="stakeholder-contact" contenteditable="true"></td>
 							<td class="stakeholder-remarks" contenteditable="true"></td>
 						</tr>
