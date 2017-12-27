@@ -382,6 +382,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				font: {
 					multi: 'html'
 				}
+    			},
+ 			"physics": {
+				enabled": true,
+				"barnesHut": {
+					"avoidOverlap": 1
+				}
     			}
 		};
 
