@@ -675,13 +675,29 @@ var updateNetwork = function(event) {
 	var title = titleContent ? '\n' + titleContent : "";
 	var orgContent = updateRow.querySelector('.stakeholder-org').textContent;
 	var org = orgContent ? '\n' + orgContent : "";
-	console.log(name);
+	console.log(name.length);
 	if(name) {
 		label = '<b>' + name + '</b>' + title + org;
 	} else {
 		label = '<b>' + org + '</b>';
 	}
-	networkData.nodes.update({id: updateId, label: label});
+	var type = updateRow.querySelector('.stakeholder-select').value;
+	var background = '#f0f8ff';
+	switch(type) {
+		case 'government':
+			background = '#f0f8ff';
+			break;
+		case 'business':
+			background = '#98FB98';
+			break;
+		case 'ngo':
+			background = '#D8BFD8';
+			break;
+		case 'community':
+			background = '#FFFFE0';
+			break;
+	}
+	networkData.nodes.update({id: updateId, label: label, color: {background: background}});
 }
 
 class Assessment {
