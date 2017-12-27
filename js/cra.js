@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				}
     			},
  			"physics": {
-				"enabled": true,
+				"enabled": false,
 				"barnesHut": {
 					"avoidOverlap": 1
 				}
