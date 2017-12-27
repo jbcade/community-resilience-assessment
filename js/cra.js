@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				}
     			},
  			"physics": {
-				enabled": true,
+				"enabled": true,
 				"barnesHut": {
 					"avoidOverlap": 1
 				}
@@ -683,9 +683,10 @@ var updateNetwork = function(event) {
 	var org = orgContent ? '\n' + orgContent : "";
 	console.log(name.length);
 	if(name) {
+		
 		label = '<b>' + name + '</b>' + title + org;
 	} else {
-		label = '<b>' + org + '</b>';
+		label = '<b>' + orgContent + '</b>';
 	}
 	var type = updateRow.querySelector('.stakeholder-select').value;
 	var background = '#f0f8ff';
