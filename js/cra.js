@@ -926,9 +926,9 @@ function addressLookup(event) {
 		event.target.dataset.address = event.target.textContent;
 	}
 	console.log(event.target.dataset.address);
-	var content = '';
+	//var content = '';
 	var addressParent = event.target.parentNode;
-	var contentEditables = addressParent.querySelectorAll('[contenteditable]');
+	/*var contentEditables = addressParent.querySelectorAll('[contenteditable]');
 	for (var i = 0; i < contentEditables.length; i++) {
 		if (i === 0) {
 			if(contentEditables[i].textContent) {
@@ -939,11 +939,11 @@ function addressLookup(event) {
 				content += '<div>' + contentEditables[i].textContent + '</div>';
 			}				
 		}
-	}
+	}*/
 	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
-			setMarker(results[0].geometry.location, event.target.dataset.id, event.target.dataset.type, content);
+			setMarker(results[0].geometry.location, event.target.dataset.id, event.target.dataset.type, addressParent);
 			return;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
@@ -959,18 +959,20 @@ function removeMarker(markerId) {
     }
 }
 
-function setMarker(position, markerId, markerType, contentString) {
+function setMarker(position, markerId, markerType, node) {
     console.log(markerType);
     console.log(icons[markerType].icon);
+    console.log(node);
     removeMarker(markerId);
     var infowindow = new google.maps.InfoWindow({
-        content: contentString
+        content: "Test"
     });
     var temp_marker = new google.maps.Marker({
         position: position,
 	icon: icons[markerType].icon
     });
     temp_marker.addListener('click', function() {
+	console.log(node);
 	infowindow.open(infrastructureMap, temp_marker);
     });
     temp_marker.setMap(infrastructureMap);
