@@ -926,11 +926,24 @@ function addressLookup(event) {
 		event.target.dataset.address = event.target.textContent;
 	}
 	console.log(event.target.dataset.address);
-	console.log(event.target.parentNode);
+	var content = '';
+	var addressParent = event.target.parentNode;
+	var contentEditables = addressParent.querySelectorAll('[contenteditable]');
+	for (var i = 0; i < contentEditables.length; i++) {
+		if (i = 0) {
+			if(contentEditables[i].textContent) {
+				content += '<h3>' + contentEditables[i].textContent + '</h3>';
+			}
+		} else {
+			if(contentEditables[i].textContent) {
+				content += '<div>' + contentEditables[i].textContent + '</div>';
+			}				
+		}
+	}
 	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
-			setMarker(results[0].geometry.location, event.target.dataset.id, event.target.dataset.type);
+			setMarker(results[0].geometry.location, event.target.dataset.id, event.target.dataset.type, content);
 			return;
 		} else {
 			console.log('Geocode was not successful for the following reason: ' + status);
