@@ -930,7 +930,7 @@ function addressLookup(event) {
 	var addressParent = event.target.parentNode;
 	var contentEditables = addressParent.querySelectorAll('[contenteditable]');
 	for (var i = 0; i < contentEditables.length; i++) {
-		if (i = 0) {
+		if (i === 0) {
 			if(contentEditables[i].textContent) {
 				content += '<h3>' + contentEditables[i].textContent + '</h3>';
 			}
