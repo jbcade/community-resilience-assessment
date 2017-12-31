@@ -926,6 +926,7 @@ function addressLookup(event) {
 		event.target.dataset.address = event.target.textContent;
 	}
 	console.log(event.target.dataset.address);
+	console.log(event.target.parentNode);
 	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
@@ -945,13 +946,19 @@ function removeMarker(markerId) {
     }
 }
 
-function setMarker(position, markerId, markerType) {
+function setMarker(position, markerId, markerType, contentString) {
     console.log(markerType);
     console.log(icons[markerType].icon);
     removeMarker(markerId);
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
     var temp_marker = new google.maps.Marker({
         position: position,
 	icon: icons[markerType].icon
+    });
+    temp_marker.addListener('click', function() {
+	infowindow.open(infrastructureMap, temp_marker);
     });
     temp_marker.setMap(infrastructureMap);
     temp_marker.metadata = { id: markerId };
