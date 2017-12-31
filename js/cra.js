@@ -952,11 +952,11 @@ function setInfoWindowContent(node) {
 	for (var i = 0; i < contentEditables.length; i++) {
 		if (i === 0) {
 			if(contentEditables[i].textContent) {
-				content += '<h3>' + contentEditables[i].textContent + '</h3>';
+				content += '<h5>' + contentEditables[i].textContent + '</h5>';
 			}
 		} else {
 			if(contentEditables[i].textContent) {
-				content += '<div>' + contentEditables[i].textContent + '</div>';
+				content += '<div class="info-content">' + contentEditables[i].textContent + '</div>';
 			}				
 		}
 	}
