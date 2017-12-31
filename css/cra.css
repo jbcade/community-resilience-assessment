@@ -122,11 +122,10 @@ li.nav-item > a {
 
 #map {
 	position:relative;
-	height:500px;
-	width:1110px;
+	height:85vh;
+	width:100%;
 	margin: 0;
 	padding: 0;
-	
 }
 
 .swot-helpful {
@@ -334,7 +333,7 @@ tr:hover .update-network {
 }
 
 #ecomap {
-	height:600px;
+	height:85vh;
 	/*width:1070px;*/
 }
 
