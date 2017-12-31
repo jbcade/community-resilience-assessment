@@ -926,20 +926,7 @@ function addressLookup(event) {
 		event.target.dataset.address = event.target.textContent;
 	}
 	console.log(event.target.dataset.address);
-	//var content = '';
 	var addressParent = event.target.parentNode;
-	/*var contentEditables = addressParent.querySelectorAll('[contenteditable]');
-	for (var i = 0; i < contentEditables.length; i++) {
-		if (i === 0) {
-			if(contentEditables[i].textContent) {
-				content += '<h3>' + contentEditables[i].textContent + '</h3>';
-			}
-		} else {
-			if(contentEditables[i].textContent) {
-				content += '<div>' + contentEditables[i].textContent + '</div>';
-			}				
-		}
-	}*/
 	geocoder.geocode( { 'address': event.target.textContent}, function(results, status) {
 		if (status == 'OK') {
 			console.log(JSON.stringify(results[0]));
@@ -959,20 +946,37 @@ function removeMarker(markerId) {
     }
 }
 
+function setInfoWindowContent(node) {
+	var content = '';
+	var contentEditables = node.querySelectorAll('[contenteditable]');
+	for (var i = 0; i < contentEditables.length; i++) {
+		if (i === 0) {
+			if(contentEditables[i].textContent) {
+				content += '<h3>' + contentEditables[i].textContent + '</h3>';
+			}
+		} else {
+			if(contentEditables[i].textContent) {
+				content += '<div>' + contentEditables[i].textContent + '</div>';
+			}				
+		}
+	}
+	return content;
+}
+
 function setMarker(position, markerId, markerType, node) {
     console.log(markerType);
     console.log(icons[markerType].icon);
     console.log(node);
     removeMarker(markerId);
     var infowindow = new google.maps.InfoWindow({
-        content: "Test"
+        content: setInfoWindowContent(node)
     });
     var temp_marker = new google.maps.Marker({
         position: position,
 	icon: icons[markerType].icon
     });
     temp_marker.addListener('click', function() {
-	console.log(node);
+	infowindow.setContent(setInfoWindowContent(node));
 	infowindow.open(infrastructureMap, temp_marker);
     });
     temp_marker.setMap(infrastructureMap);
