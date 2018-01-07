@@ -580,6 +580,9 @@ function populateDataFramework(dataFramework) {
 						var bodyTh = document.createElement('th');
 							bodyTh.scope = "row";
 							bodyTh.setAttribute("contentEditable", true);
+							if(category.subcategory) {
+								bodyTh.classList.add('indent');	
+							}
 							var bodyThText = document.createTextNode(category.name);
 							bodyTh.appendChild(bodyThText);
 						bodyTr.appendChild(bodyTh);
