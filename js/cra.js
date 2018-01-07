@@ -581,7 +581,8 @@ function populateDataFramework(dataFramework) {
 							bodyTh.scope = "row";
 							bodyTh.setAttribute("contentEditable", true);
 							if(category.subcategory) {
-								bodyTh.classList.add('indent');	
+								var indentation = category.subcategory === 2 ? 'indentx2' : 'indent';
+								bodyTh.classList.add(indentation);	
 							}
 							var bodyThText = document.createTextNode(category.name);
 							bodyTh.appendChild(bodyThText);
