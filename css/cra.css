@@ -352,3 +352,7 @@ tr:hover .update-network {
 .community {
 	background-color: #FFFFE0;	
 }
+
+.indent {
+	padding-left: 4rem;	
+}
