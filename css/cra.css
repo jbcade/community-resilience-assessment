@@ -354,5 +354,5 @@ tr:hover .update-network {
 }
 
 .indent {
-	padding-left: 4rem;	
+	padding-left: 4rem !important;	
 }
