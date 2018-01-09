@@ -614,19 +614,23 @@ function populateDataFramework(dataFramework) {
 						}
 						datapoints.forEach(function(datapoint, dix) {
 							if (dataTypes[dix] === 'coordinates') {
-								console.log(datapoint);
+
 							} else {
 								var innerTd = document.createElement('td');
 								innerTd.setAttribute("contentEditable", true);
 								if (dataTypes[dix] === 'address') {
-									innerTd.classList.add('address');
-									innerTd.dataset.type = tableName;
-									innerTd.dataset.id = uniqueID;
-									uniqueID++;
-								innerTd.addEventListener('blur', addressLookup);
+										innerTd.classList.add('address');
+										innerTd.dataset.type = tableName;
+										innerTd.dataset.id = uniqueID;
+										uniqueID++;
+									innerTd.addEventListener('blur', addressLookup);
 								}
+								if (dataTypes[dix] === 'URL') {
+									innerTd.innerHTML(datapoint);
+								} else {	
 									var innerTdText = document.createTextNode(datapoint);
-								innerTd.appendChild(innerTdText);
+									innerTd.appendChild(innerTdText);
+								}
 								bodyTr.appendChild(innerTd);
 							}
 						});
