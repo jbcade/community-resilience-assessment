@@ -614,7 +614,7 @@ function populateDataFramework(dataFramework) {
 						}
 						datapoints.forEach(function(datapoint, dix) {
 							console.log(dataTypes[dix]);
-							if (dataTypes[dix] === 'coordinates') {
+							if (dataTypes[dix] === undefined) {
 
 							} else {
 								var innerTd = document.createElement('td');
