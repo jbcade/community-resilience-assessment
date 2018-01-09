@@ -611,18 +611,22 @@ function populateDataFramework(dataFramework) {
 							}							
 						}
 						datapoints.forEach(function(datapoint, dix) {
-							var innerTd = document.createElement('td');
-							innerTd.setAttribute("contentEditable", true);
-							if (dataTypes[dix] === 'address') {
-								innerTd.classList.add('address');
-								innerTd.dataset.type = tableName;
-								innerTd.dataset.id = uniqueID;
-								uniqueID++;
+							if (dataTypes[dix] === 'coordinates') {
+								console.log(datapoint);
+							} else {
+								var innerTd = document.createElement('td');
+								innerTd.setAttribute("contentEditable", true);
+								if (dataTypes[dix] === 'address') {
+									innerTd.classList.add('address');
+									innerTd.dataset.type = tableName;
+									innerTd.dataset.id = uniqueID;
+									uniqueID++;
 								innerTd.addEventListener('blur', addressLookup);
+								}
+									var innerTdText = document.createTextNode(datapoint);
+								innerTd.appendChild(innerTdText);
+								bodyTr.appendChild(innerTd);
 							}
-								var innerTdText = document.createTextNode(datapoint);
-							innerTd.appendChild(innerTdText);
-							bodyTr.appendChild(innerTd);
 						});
 					tbody.appendChild(bodyTr);
 				});
