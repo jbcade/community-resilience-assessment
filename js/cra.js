@@ -546,11 +546,13 @@ function populateDataFramework(dataFramework) {
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
 						dataTable["variables"].forEach(function(variable) {
-							dataTypes.push(variable.type);
-							var th = document.createElement("th");
-								thText = document.createTextNode(variable.name);
-							th.appendChild(thText);
-							tr.appendChild(th);
+							if (variable.type !== 'Coordinates') {
+								dataTypes.push(variable.type);
+								var th = document.createElement("th");
+									thText = document.createTextNode(variable.name);
+								th.appendChild(thText);
+								tr.appendChild(th);
+							}
 						});
 					thead.appendChild(tr);
 					var helpTr = document.createElement("tr");
