@@ -626,7 +626,7 @@ function populateDataFramework(dataFramework) {
 									innerTd.addEventListener('blur', addressLookup);
 								}
 								if (dataTypes[dix] === 'URL') {
-									innerTd.innerHTML(datapoint);
+									innerTd.innerHTML = datapoint;
 								} else {	
 									var innerTdText = document.createTextNode(datapoint);
 									innerTd.appendChild(innerTdText);
