@@ -546,7 +546,7 @@ function populateDataFramework(dataFramework) {
 							headerControls.appendChild(helpIcon);
 						tr.appendChild(headerControls);
 						dataTable["variables"].forEach(function(variable) {
-							if (variable.type !== 'Coordinates') {
+							if (variable.type !== 'coordinates') {
 								dataTypes.push(variable.type);
 								var th = document.createElement("th");
 									thText = document.createTextNode(variable.name);
@@ -617,7 +617,6 @@ function populateDataFramework(dataFramework) {
 
 							} else {
 								var innerTd = document.createElement('td');
-								innerTd.setAttribute("contentEditable", true);
 								if (dataTypes[dix] === 'address') {
 										innerTd.classList.add('address');
 										innerTd.dataset.type = tableName;
@@ -626,9 +625,11 @@ function populateDataFramework(dataFramework) {
 									innerTd.addEventListener('blur', addressLookup);
 								}
 								if (dataTypes[dix] === 'URL') {
+									innerTd.setAttribute("contentEditable", false);
 									innerTd.innerHTML = datapoint;
 								} else {	
 									var innerTdText = document.createTextNode(datapoint);
+									innerTd.setAttribute("contentEditable", true);
 									innerTd.appendChild(innerTdText);
 								}
 								bodyTr.appendChild(innerTd);
