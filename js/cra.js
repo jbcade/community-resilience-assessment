@@ -613,6 +613,7 @@ function populateDataFramework(dataFramework) {
 							}							
 						}
 						datapoints.forEach(function(datapoint, dix) {
+							console.log(dataTypes[dix]);
 							if (dataTypes[dix] === 'coordinates') {
 
 							} else {
