@@ -1,1 +1,0 @@
-# community-resilience-assessment.github.io
